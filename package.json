@@ -1,0 +1,13 @@
+{
+    "name": "com.mmu.cavesdk",
+    "version": "1.0.0",
+    "displayName": "MMU CAVE SDK",
+    "description": "An SDK which demonstrates uses for the Brooks CAVE",
+    "unity": "2019.1",
+    "author": {
+      "name": "Joshua Simspon",
+      "url": "https://www.linkedin.com/in/joshuaoliversimpson/"
+    }
+  }
+  
+  

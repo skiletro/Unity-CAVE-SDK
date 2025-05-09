@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8fdef74c230c72a4fa143d1eaffd905b
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 7747
+  packageName: Kinect with MS-SDK
+  packageVersion: 1.12
+  assetPath: Assets/PlaymakerKinectActions/PlaymakerKinectActions.zip
+  uploadId: 48550
