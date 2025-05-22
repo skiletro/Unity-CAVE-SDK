@@ -1,3 +1,9 @@
+**This package is work in progress and everything is subject to change.** 
+
+
+<br/>
+
+
 ## Overview
 This package is provides functionality for a [CAVE (Cave automatic virtual environment)](https://en.wikipedia.org/wiki/Cave_automatic_virtual_environment) space with appropriate camera projection and interaction abilities. This project is specifically configured for the MMU Brooks CAVE (BR0.89), a 5m by 5m floorspace with ~2.8125m high walls, running on three walls and the floor. 
 
