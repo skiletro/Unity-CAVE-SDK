@@ -68,7 +68,13 @@ public class SceneTransitioner : MonoBehaviour
                 {
                     if (i < sceneNames.Length)
                     {
-                        await SceneManager.LoadSceneAsync(sceneNames[i]);
+                        var asyncOp = SceneManager.LoadSceneAsync(sceneNames[i]);
+                        while (!asyncOp.isDone)
+                        {
+                            if (cancellationToken.IsCancellationRequested)
+                                return;
+                            await Task.Yield();
+                        }
                     }
                     else
                     {
