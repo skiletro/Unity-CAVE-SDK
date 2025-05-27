@@ -1,13 +1,28 @@
 {
     "name": "com.mmu.cavesdk",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "displayName": "MMU CAVE SDK",
-    "description": "An SDK which demonstrates uses for the Brooks CAVE",
+    "description": "An software developmenet kit to make creating Unity content in a VR CAVE (Cave Automatic Virtual Environment) easier and more accessible.",
     "unity": "2019.1",
     "author": {
-      "name": "Joshua Simspon",
-      "url": "https://www.linkedin.com/in/joshuaoliversimpson/"
-    }
+      "name": "Manchester Metropolitan University",
+      "url": "https://www.mmu.ac.uk/"
+    },
+    "dependencies": {
+      "com.unity.textmeshpro": "3.0.4"
+    },
+    "samples": [ 
+      {
+        "displayName": "Simple Kinect Functionality",
+        "description": "Scripts and demo scenes which allow for the intregration of a Kinect for use in controlling camera position and perspective.",
+        "path": "Samples~/Kinect"
+      },
+      {
+        "displayName": "Simple 360 Video Player",
+        "description": "Scripts and demo scenes which show how to create a 360 degree video player for a CAVE.",
+        "path": "Samples~/360VideoPlayer"
+      }
+    ]
   }
   
   
