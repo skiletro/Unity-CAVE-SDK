@@ -1514,5 +1514,7 @@ MonoBehaviour:
   cave: {fileID: 8379951209906154221}
   movementSpeed: 10
   rotationSpeed: 100
-  selectedTouchType: 0
+  selectedTouchType: 3
+  allowContinousTouch: 1
+  keybindPanel: {fileID: 0}
   teleportOffset: {x: 0, y: 0, z: 0}
