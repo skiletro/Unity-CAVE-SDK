@@ -1,6 +1,3 @@
-<br/>
-
-
 ## Overview
 This package provides easy to use functionality within [Unity](https://unity.com/) for customaisable [CAVE (Cave automatic virtual environment)](https://en.wikipedia.org/wiki/Cave_automatic_virtual_environment) space configurations, with appropriate camera projection, interaction abilities and extension features such as incorporating Microsoft Kinect.
 
