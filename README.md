@@ -91,3 +91,9 @@ To best ensure the images displayed on each wall do so as expected, the origin f
 - For intractability, see the CAVEController.cs component on the "CAVE_3W1F" prefab.
 
 - Camera projection is handled through the default Unity camera and supports both the Universal and High Definition Render Pipelines (UPR and HDRP), and also any other camera screen effects.
+
+
+If using multiple displays,
+1. Go to Project Settings > Player > Resolution and Presentation.
+2. Set the Fullscreen Mode to "Fullscreen Window".
+
