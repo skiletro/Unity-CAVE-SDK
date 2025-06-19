@@ -1,3 +1,7 @@
+## [1.0.3] - 2025-06-19
+### Better Interaction Demos
+The CaveController.cs now has better object spawning and projectile firing demos.
+
 ## [1.0.2] - 2025-05-30
 ### Updated CAVE Prefab Origin Point
 "CAVE_3W1F" prefab has had origin point set to the floor instead of the centre.
