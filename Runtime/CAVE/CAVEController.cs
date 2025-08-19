@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;//Enables necessary touch input functions
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 /// <summary>
 /// General controller for the CAVE system.
@@ -44,11 +47,15 @@ public class CAVEController : MonoBehaviour
 
     private void Update()
     {
-        HandleTouchActions();
-
+        //HandleTouchActions();
         // Keyboard Input
-        CycleTouchInput();
+        //CycleTouchInput();
         Quit();
+    }
+
+    private void Awake()
+    {
+        EnhancedTouchSupport.Enable();
     }
 
     private void FixedUpdate()
@@ -59,8 +66,21 @@ public class CAVEController : MonoBehaviour
 
     #region Touch Actions
 
-    private void HandleTouchActions()
+    public void OnTap(InputAction.CallbackContext context)
     {
+        foreach (Touch t in Touch.activeTouches) //takes an array of all active touches
+        {
+            RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(t.screenPosition, cameras); //raycasts from each of these touches
+            if (!raycastHit.collider)
+            {
+                return;
+            }
+        }
+        
+    }
+
+    private void HandleTouchActions()
+    { 
         // Check for left mouse button click.
         bool isTouchAllowed = (allowContinousTouch) ? Input.GetMouseButton(0) : Input.GetMouseButtonDown(0);
         if (!isTouchAllowed)
