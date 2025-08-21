@@ -25,7 +25,7 @@
                 },
                 {
                     "name": "Look",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "c7bfca39-9b81-4d67-9058-6dbe0d971d47",
                     "expectedControlType": "Delta",
                     "processors": "",

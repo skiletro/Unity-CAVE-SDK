@@ -68,14 +68,12 @@ public class CAVEController : MonoBehaviour
 
     public void OnTap(InputAction.CallbackContext context)
     {
-        foreach (Touch t in Touch.activeTouches) //takes an array of all active touches
-        {
-            RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(t.screenPosition, cameras); //raycasts from each of these touches
-            if (!raycastHit.collider)
-            {
-                return;
-            }
-            // Switch selected TouchType Input
+         RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector2>(), cameras); //raycasts from each of these touches
+         if (!raycastHit.collider)
+         {
+             return;
+         }
+         // Switch selected TouchType Input
         switch (selectedTouchType)
         {
             case TouchType.Teleport:
@@ -94,7 +92,13 @@ public class CAVEController : MonoBehaviour
                 Debug.LogWarning("No action selected or action not implemented.");
                 break;
         }
-        }
+        
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        cave.transform.Rotate(Vector3.right, context.ReadValue<Vector2>().x * rotationSpeed);
+        cave.transform.Rotate(Vector3.up, context.ReadValue<Vector2>().y * rotationSpeed);
     }
 
     private void HandleTouchActions()
@@ -230,6 +234,7 @@ public class CAVEController : MonoBehaviour
             cave.transform.Translate(Vector3.up * movementSpeed * Time.fixedDeltaTime); // Move up
         if (Input.GetKey(KeyCode.LeftControl))
             cave.transform.Translate(Vector3.down * movementSpeed * Time.fixedDeltaTime); // Move down
+
     }
 
     void HandleRotationInput()
