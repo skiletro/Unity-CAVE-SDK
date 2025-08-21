@@ -1515,10 +1515,10 @@ MonoBehaviour:
   cave: {fileID: 8379951209906154221}
   movementSpeed: 10
   rotationSpeed: 100
-  selectedTouchType: 3
-  allowContinousTouch: 1
+  selectedTouchType: 2
+  allowContinousTouch: 0
   keybindPanel: {fileID: 0}
-  teleportOffset: {x: 0, y: 0, z: 0}
+  teleportOffset: {x: 0, y: 1.425, z: 0}
 --- !u!114 &-5560601613749310831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1531,8 +1531,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 6b624ff3add1bd94a87f2c79a32fa4ff, type: 3}
-  m_NotificationBehavior: 0
+  m_Actions: {fileID: -944628639613478452, guid: 6b624ff3add1bd94a87f2c79a32fa4ff,
+    type: 3}
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -1543,7 +1544,31 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 46802612105210110}
+        m_TargetAssemblyTypeName: CAVEController, MMU.CAVE
+        m_MethodName: OnTap
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 2bb4c46c-473a-418f-8867-d1de1bfbdb59
+    m_ActionName: 'Demo/Tap[/Touchscreen/touch0/press,/Touchscreen/touch1/press,/Touchscreen/touch2/press,/Touchscreen/touch3/press,/Touchscreen/touch4/press,/Touchscreen/touch5/press,/Touchscreen/touch6/press,/Touchscreen/touch7/press,/Touchscreen/touch8/press,/Touchscreen/touch9/press]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9dabf04f-80f3-4ce5-a3f0-d9edc801528d
+    m_ActionName: 'Demo/Hold[/Touchscreen/press]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c7bfca39-9b81-4d67-9058-6dbe0d971d47
+    m_ActionName: 'Demo/Look[/Touchscreen/delta]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Cave Demo Control Scheme
   m_DefaultActionMap: Demo

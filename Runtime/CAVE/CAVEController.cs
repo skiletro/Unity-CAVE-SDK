@@ -49,7 +49,7 @@ public class CAVEController : MonoBehaviour
     {
         //HandleTouchActions();
         // Keyboard Input
-        //CycleTouchInput();
+        CycleTouchInput();
         Quit();
     }
 
@@ -75,8 +75,26 @@ public class CAVEController : MonoBehaviour
             {
                 return;
             }
+            // Switch selected TouchType Input
+        switch (selectedTouchType)
+        {
+            case TouchType.Teleport:
+                MoveCaveToClickPosition(raycastHit);
+                break;
+            case TouchType.SpawnObjectAtPosition:
+                InstantiateRandomPrimitiveAtClickPosition(raycastHit);
+                break;
+            case TouchType.Touchables:
+                InteractWithTouchables(raycastHit);
+                break;
+            case TouchType.ShootProjectile:
+                InstantiateProjectile(raycastHit);
+                break;
+            default:
+                Debug.LogWarning("No action selected or action not implemented.");
+                break;
         }
-        
+        }
     }
 
     private void HandleTouchActions()

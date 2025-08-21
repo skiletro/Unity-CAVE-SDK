@@ -37,8 +37,8 @@
                 {
                     "name": "",
                     "id": "160febaf-ee84-4497-81aa-2e05ea4a7c8b",
-                    "path": "<Touchscreen>/touch*/Press",
-                    "interactions": "",
+                    "path": "<Pointer>/position",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": ";Cave Demo Control Scheme",
                     "action": "Tap",
@@ -48,7 +48,7 @@
                 {
                     "name": "",
                     "id": "1bb27b26-13bd-4465-8c46-70b72ecd88af",
-                    "path": "<Touchscreen>/Press",
+                    "path": "<Pointer>/position",
                     "interactions": "Hold",
                     "processors": "",
                     "groups": "",
@@ -59,7 +59,7 @@
                 {
                     "name": "",
                     "id": "0ef989d1-e8c7-4781-97f2-a14709a3fbb9",
-                    "path": "<Touchscreen>/delta",
+                    "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Cave Demo Control Scheme",
