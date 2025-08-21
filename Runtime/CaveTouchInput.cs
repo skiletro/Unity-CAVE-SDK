@@ -104,7 +104,7 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
                     ""name"": ""Hold"",
                     ""type"": ""Value"",
                     ""id"": ""9dabf04f-80f3-4ce5-a3f0-d9edc801528d"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Vector3"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true

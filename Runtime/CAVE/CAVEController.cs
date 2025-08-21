@@ -53,10 +53,10 @@ public class CAVEController : MonoBehaviour
         Quit();
     }
 
-    private void Awake()
+    /*private void Awake()
     {
         EnhancedTouchSupport.Enable();
-    }
+    }*/
 
     private void FixedUpdate()
     {
@@ -68,12 +68,12 @@ public class CAVEController : MonoBehaviour
 
     public void OnTap(InputAction.CallbackContext context)
     {
-         RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector2>(), cameras); //raycasts from each of these touches
+         RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector2>(), cameras); //raycasts from each touch
          if (!raycastHit.collider)
          {
              return;
          }
-         // Switch selected TouchType Input
+         // perform selected TouchType Input
         switch (selectedTouchType)
         {
             case TouchType.Teleport:
@@ -95,10 +95,20 @@ public class CAVEController : MonoBehaviour
         
     }
 
-    public void OnLook(InputAction.CallbackContext context)
+    public void OnLook(InputAction.CallbackContext context) //Use swipe gestures to rotate cave view
     {
         cave.transform.Rotate(Vector3.right, context.ReadValue<Vector2>().x * rotationSpeed);
         cave.transform.Rotate(Vector3.up, context.ReadValue<Vector2>().y * rotationSpeed);
+    }
+
+    public void OnHold(InputAction.CallbackContext context)
+    {
+        RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector3>(), cameras); //raycasts to this hold point
+        if (!raycastHit.collider)
+        {
+            return;
+        }
+        MoveCaveToClickPosition(raycastHit); //Teleport on hold
     }
 
     private void HandleTouchActions()
