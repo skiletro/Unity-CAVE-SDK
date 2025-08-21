@@ -9,7 +9,8 @@
     "url": "https://www.mmu.ac.uk/"
   },
   "dependencies": {
-    "com.unity.textmeshpro": "3.0.4"
+    "com.unity.textmeshpro": "3.0.4",
+    "com.unity.inputsystem": "1.13.1"
   },
   "samples": [
     {
