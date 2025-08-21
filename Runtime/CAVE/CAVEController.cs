@@ -97,8 +97,13 @@ public class CAVEController : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context) //Use swipe gestures to rotate cave view
     {
-        cave.transform.Rotate(Vector3.right, context.ReadValue<Vector2>().x * rotationSpeed);
-        cave.transform.Rotate(Vector3.up, context.ReadValue<Vector2>().y * rotationSpeed);
+        //swipe is always between 1 and -1
+        float swipe =  context.ReadValue<Vector2>().x;
+        Debug.Log(swipe);
+        /*if(Mathf.Abs(swipe)<0.85){ //ignore minor movements
+            return;
+        }*/
+          cave.transform.Rotate(Vector3.down, swipe);  
     }
 
     public void OnHold(InputAction.CallbackContext context)

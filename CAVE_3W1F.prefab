@@ -1562,11 +1562,35 @@ MonoBehaviour:
     m_ActionId: 2bb4c46c-473a-418f-8867-d1de1bfbdb59
     m_ActionName: 'Demo/Tap[/Touchscreen/touch0/press,/Touchscreen/touch1/press,/Touchscreen/touch2/press,/Touchscreen/touch3/press,/Touchscreen/touch4/press,/Touchscreen/touch5/press,/Touchscreen/touch6/press,/Touchscreen/touch7/press,/Touchscreen/touch8/press,/Touchscreen/touch9/press]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 46802612105210110}
+        m_TargetAssemblyTypeName: CAVEController, MMU.CAVE
+        m_MethodName: OnHold
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_ActionId: 9dabf04f-80f3-4ce5-a3f0-d9edc801528d
     m_ActionName: 'Demo/Hold[/Touchscreen/press]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 46802612105210110}
+        m_TargetAssemblyTypeName: CAVEController, MMU.CAVE
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_ActionId: c7bfca39-9b81-4d67-9058-6dbe0d971d47
     m_ActionName: 'Demo/Look[/Touchscreen/delta]'
   m_NeverAutoSwitchControlSchemes: 1
