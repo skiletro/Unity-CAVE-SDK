@@ -47,6 +47,8 @@ public class CAVEController : MonoBehaviour
         Touchables,              // Interact with Touchable.cs objects
         Look                    //Drag along CAVE walls to rotate the camera view
     };
+    
+    PlayerInput playerInput;
 
     private void Update()
     {
@@ -56,10 +58,9 @@ public class CAVEController : MonoBehaviour
         Quit();
     }
 
-    /*private void Awake()
-    {
-        EnhancedTouchSupport.Enable();
-    }*/
+    private void Awake(){
+        playerInput = GetComponent<PlayerInput>();
+    }
 
     private void FixedUpdate()
     {
@@ -78,16 +79,7 @@ public class CAVEController : MonoBehaviour
         {
             return;
         }*/
-        if (selectedTouchType == TouchType.Look)
-        {
-            //swipe is always between 1 and -1
-            float swipe = context.ReadValue<Vector2>().x;
-            cave.transform.Rotate(Vector3.down, swipe);
-            //uses the touch pointer delta to rotate the CAVE camera.
-
-        }
-        else
-        {
+        
             RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector2>(), cameras);
             if (!raycastHit.collider)
             {
@@ -117,7 +109,6 @@ public class CAVEController : MonoBehaviour
                     Debug.LogWarning("No action selected or action not implemented.");
                     break;
             }
-        }
     }
 
     // This is broken, it will only work with one camera.
@@ -256,6 +247,7 @@ public class CAVEController : MonoBehaviour
             string message = $"Selected Touch Type: {selectedTouchType}";
             Debug.Log(message);
             HandleKeybindPopup(message);
+            SwitchActionMap();
         }
 
         // Cycle between single touch and continous touch option.
@@ -265,6 +257,16 @@ public class CAVEController : MonoBehaviour
             string message = $"Allow Continous Touch: {allowContinousTouch}";
             Debug.Log(message);
             HandleKeybindPopup(message);
+        }
+    }
+
+    protected void SwitchActionMap(){
+        if(selectedTouchType == TouchType.Look){
+        playerInput.actions.FindActionMap("Swipe").Enable();
+        playerInput.actions.FindActionMap("Touch").Disable();}
+        else{
+        playerInput.actions.FindActionMap("Swipe").Disable();
+        playerInput.actions.FindActionMap("Touch").Enable();  
         }
     }
     #endregion

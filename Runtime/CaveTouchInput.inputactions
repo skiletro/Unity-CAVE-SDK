@@ -2,7 +2,7 @@
     "name": "CaveTouchInput",
     "maps": [
         {
-            "name": "Demo",
+            "name": "Touch",
             "id": "298daa05-e0b5-4f20-9723-8c553bdaafc1",
             "actions": [
                 {
@@ -11,25 +11,7 @@
                     "id": "2bb4c46c-473a-418f-8867-d1de1bfbdb59",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Look",
-                    "type": "PassThrough",
-                    "id": "c7bfca39-9b81-4d67-9058-6dbe0d971d47",
-                    "expectedControlType": "Delta",
-                    "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Hold",
-                    "type": "PassThrough",
-                    "id": "9dabf04f-80f3-4ce5-a3f0-d9edc801528d",
-                    "expectedControlType": "Vector2",
-                    "processors": "StickDeadzone(min=0.3,max=0.925)",
-                    "interactions": "Hold(duration=1)",
                     "initialStateCheck": true
                 }
             ],
@@ -44,26 +26,32 @@
                     "action": "Tap",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "Swipe",
+            "id": "97ed4f94-8a5c-443d-9bd4-77067a545cc8",
+            "actions": [
                 {
-                    "name": "",
-                    "id": "1bb27b26-13bd-4465-8c46-70b72ecd88af",
-                    "path": "<Pointer>/position",
-                    "interactions": "",
+                    "name": "Drag",
+                    "type": "PassThrough",
+                    "id": "5cc4f1f9-8106-4f06-8bbd-e2813a0c5493",
+                    "expectedControlType": "Delta",
                     "processors": "",
-                    "groups": ";Cave Demo Control Scheme",
-                    "action": "Hold",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
                 {
                     "name": "",
-                    "id": "838887b6-8074-45ae-afc9-7bd0036d1937",
+                    "id": "d4753ae5-774d-4979-8d5d-c9c62f5d913d",
                     "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Cave Demo Control Scheme",
-                    "action": "Look",
+                    "groups": "",
+                    "action": "Drag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

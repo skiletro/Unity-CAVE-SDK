@@ -88,7 +88,7 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
     ""name"": ""CaveTouchInput"",
     ""maps"": [
         {
-            ""name"": ""Demo"",
+            ""name"": ""Touch"",
             ""id"": ""298daa05-e0b5-4f20-9723-8c553bdaafc1"",
             ""actions"": [
                 {
@@ -97,25 +97,7 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
                     ""id"": ""2bb4c46c-473a-418f-8867-d1de1bfbdb59"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Look"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""c7bfca39-9b81-4d67-9058-6dbe0d971d47"",
-                    ""expectedControlType"": ""Delta"",
-                    ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Hold"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""9dabf04f-80f3-4ce5-a3f0-d9edc801528d"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""StickDeadzone(min=0.3,max=0.925)"",
-                    ""interactions"": ""Hold(duration=1)"",
                     ""initialStateCheck"": true
                 }
             ],
@@ -130,26 +112,32 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
                     ""action"": ""Tap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
+                }
+            ]
+        },
+        {
+            ""name"": ""Swipe"",
+            ""id"": ""97ed4f94-8a5c-443d-9bd4-77067a545cc8"",
+            ""actions"": [
                 {
-                    ""name"": """",
-                    ""id"": ""1bb27b26-13bd-4465-8c46-70b72ecd88af"",
-                    ""path"": ""<Pointer>/position"",
-                    ""interactions"": """",
+                    ""name"": ""Drag"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""5cc4f1f9-8106-4f06-8bbd-e2813a0c5493"",
+                    ""expectedControlType"": ""Delta"",
                     ""processors"": """",
-                    ""groups"": "";Cave Demo Control Scheme"",
-                    ""action"": ""Hold"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""838887b6-8074-45ae-afc9-7bd0036d1937"",
+                    ""id"": ""d4753ae5-774d-4979-8d5d-c9c62f5d913d"",
                     ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Cave Demo Control Scheme"",
-                    ""action"": ""Look"",
+                    ""groups"": """",
+                    ""action"": ""Drag"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -170,16 +158,18 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Demo
-        m_Demo = asset.FindActionMap("Demo", throwIfNotFound: true);
-        m_Demo_Tap = m_Demo.FindAction("Tap", throwIfNotFound: true);
-        m_Demo_Look = m_Demo.FindAction("Look", throwIfNotFound: true);
-        m_Demo_Hold = m_Demo.FindAction("Hold", throwIfNotFound: true);
+        // Touch
+        m_Touch = asset.FindActionMap("Touch", throwIfNotFound: true);
+        m_Touch_Tap = m_Touch.FindAction("Tap", throwIfNotFound: true);
+        // Swipe
+        m_Swipe = asset.FindActionMap("Swipe", throwIfNotFound: true);
+        m_Swipe_Drag = m_Swipe.FindAction("Drag", throwIfNotFound: true);
     }
 
     ~@CaveTouchInput()
     {
-        UnityEngine.Debug.Assert(!m_Demo.enabled, "This will cause a leak and performance issues, CaveTouchInput.Demo.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Touch.enabled, "This will cause a leak and performance issues, CaveTouchInput.Touch.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Swipe.enabled, "This will cause a leak and performance issues, CaveTouchInput.Swipe.Disable() has not been called.");
     }
 
     /// <summary>
@@ -252,39 +242,29 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Demo
-    private readonly InputActionMap m_Demo;
-    private List<IDemoActions> m_DemoActionsCallbackInterfaces = new List<IDemoActions>();
-    private readonly InputAction m_Demo_Tap;
-    private readonly InputAction m_Demo_Look;
-    private readonly InputAction m_Demo_Hold;
+    // Touch
+    private readonly InputActionMap m_Touch;
+    private List<ITouchActions> m_TouchActionsCallbackInterfaces = new List<ITouchActions>();
+    private readonly InputAction m_Touch_Tap;
     /// <summary>
-    /// Provides access to input actions defined in input action map "Demo".
+    /// Provides access to input actions defined in input action map "Touch".
     /// </summary>
-    public struct DemoActions
+    public struct TouchActions
     {
         private @CaveTouchInput m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public DemoActions(@CaveTouchInput wrapper) { m_Wrapper = wrapper; }
+        public TouchActions(@CaveTouchInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Demo/Tap".
+        /// Provides access to the underlying input action "Touch/Tap".
         /// </summary>
-        public InputAction @Tap => m_Wrapper.m_Demo_Tap;
-        /// <summary>
-        /// Provides access to the underlying input action "Demo/Look".
-        /// </summary>
-        public InputAction @Look => m_Wrapper.m_Demo_Look;
-        /// <summary>
-        /// Provides access to the underlying input action "Demo/Hold".
-        /// </summary>
-        public InputAction @Hold => m_Wrapper.m_Demo_Hold;
+        public InputAction @Tap => m_Wrapper.m_Touch_Tap;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Demo; }
+        public InputActionMap Get() { return m_Wrapper.m_Touch; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -292,9 +272,9 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="DemoActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="TouchActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(DemoActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(TouchActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -302,20 +282,14 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="DemoActions" />
-        public void AddCallbacks(IDemoActions instance)
+        /// <seealso cref="TouchActions" />
+        public void AddCallbacks(ITouchActions instance)
         {
-            if (instance == null || m_Wrapper.m_DemoActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_DemoActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_TouchActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TouchActionsCallbackInterfaces.Add(instance);
             @Tap.started += instance.OnTap;
             @Tap.performed += instance.OnTap;
             @Tap.canceled += instance.OnTap;
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
-            @Hold.started += instance.OnHold;
-            @Hold.performed += instance.OnHold;
-            @Hold.canceled += instance.OnHold;
         }
 
         /// <summary>
@@ -324,27 +298,21 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="DemoActions" />
-        private void UnregisterCallbacks(IDemoActions instance)
+        /// <seealso cref="TouchActions" />
+        private void UnregisterCallbacks(ITouchActions instance)
         {
             @Tap.started -= instance.OnTap;
             @Tap.performed -= instance.OnTap;
             @Tap.canceled -= instance.OnTap;
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
-            @Hold.started -= instance.OnHold;
-            @Hold.performed -= instance.OnHold;
-            @Hold.canceled -= instance.OnHold;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="DemoActions.UnregisterCallbacks(IDemoActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="TouchActions.UnregisterCallbacks(ITouchActions)" />.
         /// </summary>
-        /// <seealso cref="DemoActions.UnregisterCallbacks(IDemoActions)" />
-        public void RemoveCallbacks(IDemoActions instance)
+        /// <seealso cref="TouchActions.UnregisterCallbacks(ITouchActions)" />
+        public void RemoveCallbacks(ITouchActions instance)
         {
-            if (m_Wrapper.m_DemoActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_TouchActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -354,21 +322,117 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="DemoActions.AddCallbacks(IDemoActions)" />
-        /// <seealso cref="DemoActions.RemoveCallbacks(IDemoActions)" />
-        /// <seealso cref="DemoActions.UnregisterCallbacks(IDemoActions)" />
-        public void SetCallbacks(IDemoActions instance)
+        /// <seealso cref="TouchActions.AddCallbacks(ITouchActions)" />
+        /// <seealso cref="TouchActions.RemoveCallbacks(ITouchActions)" />
+        /// <seealso cref="TouchActions.UnregisterCallbacks(ITouchActions)" />
+        public void SetCallbacks(ITouchActions instance)
         {
-            foreach (var item in m_Wrapper.m_DemoActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_TouchActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_DemoActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_TouchActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="DemoActions" /> instance referencing this action map.
+    /// Provides a new <see cref="TouchActions" /> instance referencing this action map.
     /// </summary>
-    public DemoActions @Demo => new DemoActions(this);
+    public TouchActions @Touch => new TouchActions(this);
+
+    // Swipe
+    private readonly InputActionMap m_Swipe;
+    private List<ISwipeActions> m_SwipeActionsCallbackInterfaces = new List<ISwipeActions>();
+    private readonly InputAction m_Swipe_Drag;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Swipe".
+    /// </summary>
+    public struct SwipeActions
+    {
+        private @CaveTouchInput m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public SwipeActions(@CaveTouchInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Swipe/Drag".
+        /// </summary>
+        public InputAction @Drag => m_Wrapper.m_Swipe_Drag;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Swipe; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="SwipeActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(SwipeActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="SwipeActions" />
+        public void AddCallbacks(ISwipeActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SwipeActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SwipeActionsCallbackInterfaces.Add(instance);
+            @Drag.started += instance.OnDrag;
+            @Drag.performed += instance.OnDrag;
+            @Drag.canceled += instance.OnDrag;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="SwipeActions" />
+        private void UnregisterCallbacks(ISwipeActions instance)
+        {
+            @Drag.started -= instance.OnDrag;
+            @Drag.performed -= instance.OnDrag;
+            @Drag.canceled -= instance.OnDrag;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="SwipeActions.UnregisterCallbacks(ISwipeActions)" />.
+        /// </summary>
+        /// <seealso cref="SwipeActions.UnregisterCallbacks(ISwipeActions)" />
+        public void RemoveCallbacks(ISwipeActions instance)
+        {
+            if (m_Wrapper.m_SwipeActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="SwipeActions.AddCallbacks(ISwipeActions)" />
+        /// <seealso cref="SwipeActions.RemoveCallbacks(ISwipeActions)" />
+        /// <seealso cref="SwipeActions.UnregisterCallbacks(ISwipeActions)" />
+        public void SetCallbacks(ISwipeActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SwipeActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SwipeActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="SwipeActions" /> instance referencing this action map.
+    /// </summary>
+    public SwipeActions @Swipe => new SwipeActions(this);
     private int m_CaveDemoControlSchemeSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -383,11 +447,11 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         }
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Demo" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Touch" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="DemoActions.AddCallbacks(IDemoActions)" />
-    /// <seealso cref="DemoActions.RemoveCallbacks(IDemoActions)" />
-    public interface IDemoActions
+    /// <seealso cref="TouchActions.AddCallbacks(ITouchActions)" />
+    /// <seealso cref="TouchActions.RemoveCallbacks(ITouchActions)" />
+    public interface ITouchActions
     {
         /// <summary>
         /// Method invoked when associated input action "Tap" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
@@ -396,19 +460,20 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTap(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Swipe" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="SwipeActions.AddCallbacks(ISwipeActions)" />
+    /// <seealso cref="SwipeActions.RemoveCallbacks(ISwipeActions)" />
+    public interface ISwipeActions
+    {
         /// <summary>
-        /// Method invoked when associated input action "Look" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Drag" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnLook(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Hold" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnHold(InputAction.CallbackContext context);
+        void OnDrag(InputAction.CallbackContext context);
     }
 }
