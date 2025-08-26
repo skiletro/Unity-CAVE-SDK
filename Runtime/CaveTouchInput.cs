@@ -95,7 +95,7 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
                     ""name"": ""Tap"",
                     ""type"": ""PassThrough"",
                     ""id"": ""2bb4c46c-473a-418f-8867-d1de1bfbdb59"",
-                    ""expectedControlType"": ""Vector3"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": true
@@ -113,7 +113,7 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
                     ""name"": ""Hold"",
                     ""type"": ""PassThrough"",
                     ""id"": ""9dabf04f-80f3-4ce5-a3f0-d9edc801528d"",
-                    ""expectedControlType"": ""Vector3"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": ""StickDeadzone(min=0.3,max=0.925)"",
                     ""interactions"": ""Hold(duration=1)"",
                     ""initialStateCheck"": true
