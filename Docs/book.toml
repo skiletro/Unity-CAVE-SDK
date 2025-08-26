@@ -1,0 +1,8 @@
+[book]
+src = "."
+language = "en"
+title = "CAVE Unity SDK"
+
+[output.html]
+git-repository-url = "https://github.com/BrooksResourceCentre/Unity-CAVE-SDK"
+smart-punctuation = true
