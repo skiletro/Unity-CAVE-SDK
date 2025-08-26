@@ -78,51 +78,46 @@ public class CAVEController : MonoBehaviour
         {
             return;
         }*/
-        RaycastHit raycastHit;
-        // Check if raycast is hitting anything, only if input gives a touch position.
-        if (context.valueType == typeof(Vector2))
+        if (selectedTouchType == TouchType.Look)
         {
-            raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector2>(), cameras);
+            //swipe is always between 1 and -1
+            float swipe = context.ReadValue<Vector2>().x;
+            cave.transform.Rotate(Vector3.down, swipe);
+            //uses the touch pointer delta to rotate the CAVE camera.
+
+        }
+        else
+        {
+            RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector2>(), cameras);
             if (!raycastHit.collider)
             {
                 return;
             }
-        }
-        else
-        {
-            raycastHit = new RaycastHit();
-        }
 
-        // Switch selected TouchType Input
+            // Switch selected TouchType Input
             switch (selectedTouchType)
             {
-                case TouchType.Look:
-                    //swipe is always between 1 and -1
-                    float swipe = context.ReadValue<Vector2>().x;
-                    cave.transform.Rotate(Vector3.down, swipe);
-                    break; //uses the touch pointer delta to rotate the CAVE camera.
-                
                 case TouchType.Teleport:
                     MoveCaveToClickPosition(raycastHit);
                     break; //moves CAVE to touch coordinates.
-                
+
                 case TouchType.SpawnObjectAtPosition:
                     InstantiateRandomPrimitiveAtClickPosition(raycastHit);
                     break; //Spawn random object at touch coordinates, temporary for demonstration.
-                
+
                 case TouchType.Touchables:
                     InteractWithTouchables(raycastHit);
                     break; //prompt a function on any object tagged as a touchable.
-                
+
                 case TouchType.ShootProjectile:
                     InstantiateProjectile(raycastHit);
                     break; //Shoot random object towards touch coordinates, temporary for demonstration.
-                
+
                 default:
                     Debug.LogWarning("No action selected or action not implemented.");
                     break;
             }
-        
+        }
     }
 
     // This is broken, it will only work with one camera.
