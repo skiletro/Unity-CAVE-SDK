@@ -190,14 +190,14 @@ public class CAVEController : MonoBehaviour
 
         // Add physics material to the projectile
         
-        PhysicMaterial physicsMaterial = new PhysicMaterial();
+        PhysicsMaterial physicsMaterial = new PhysicsMaterial();
         physicsMaterial.bounciness = 0.5f; // Set bounciness
         physicsMaterial.dynamicFriction = 0.5f; // Set dynamic friction
         physicsMaterial.staticFriction = 0.5f; // Set static friction
         projectile.GetComponent<Collider>().material = physicsMaterial; // Assign the physics material to the projectile's collider
 
         Vector3 direction = (hit.point - cave.transform.position).normalized; // Calculate direction to the hit point
-        rb.velocity = direction * 20f; // Set linear velocity of the projectile
+        rb.linearVelocity = direction * 20f; // Set linear velocity of the projectile
     }
     #endregion
 
