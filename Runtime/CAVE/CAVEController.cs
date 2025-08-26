@@ -71,16 +71,14 @@ public class CAVEController : MonoBehaviour
 
     public void HandleTouchActions(InputAction.CallbackContext context)
     { 
-        Debug.Log("HandlingTouchActions");
+        Debug.Log(context.ReadValue<Vector3>());
         // Check for left mouse button click.
         /*bool isTouchAllowed = (allowContinousTouch) ? Input.GetMouseButton(0) : Input.GetMouseButtonDown(0);
         if (!isTouchAllowed)
         {
             return;
         }*/
-        
-        RaycastHit raycastHit = new RaycastHit();
-        
+        RaycastHit raycastHit;
         // Check if raycast is hitting anything, only if input gives a touch position.
         if (context.valueType == typeof(Vector3))
         {
@@ -89,6 +87,10 @@ public class CAVEController : MonoBehaviour
             {
                 return;
             }
+        }
+        else
+        {
+            raycastHit = new RaycastHit();
         }
 
         // Switch selected TouchType Input
