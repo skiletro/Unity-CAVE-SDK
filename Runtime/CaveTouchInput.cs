@@ -92,19 +92,10 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
             ""id"": ""298daa05-e0b5-4f20-9723-8c553bdaafc1"",
             ""actions"": [
                 {
-                    ""name"": ""Hold"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""9dabf04f-80f3-4ce5-a3f0-d9edc801528d"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""StickDeadzone(min=0.3,max=0.925)"",
-                    ""interactions"": ""Hold(duration=1)"",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Tap"",
                     ""type"": ""PassThrough"",
                     ""id"": ""2bb4c46c-473a-418f-8867-d1de1bfbdb59"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Vector3"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": true
@@ -113,9 +104,18 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
                     ""name"": ""Look"",
                     ""type"": ""PassThrough"",
                     ""id"": ""c7bfca39-9b81-4d67-9058-6dbe0d971d47"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Delta"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Hold"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""9dabf04f-80f3-4ce5-a3f0-d9edc801528d"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": ""StickDeadzone(min=0.3,max=0.925)"",
+                    ""interactions"": ""Hold(duration=1)"",
                     ""initialStateCheck"": true
                 }
             ],
@@ -137,43 +137,21 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Pointer>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Cave Demo Control Scheme"",
                     ""action"": ""Hold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""953ac7b7-592f-4aa9-9322-e5dba0bf758d"",
-                    ""path"": ""2DVector"",
+                    ""name"": """",
+                    ""id"": ""838887b6-8074-45ae-afc9-7bd0036d1937"",
+                    ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Cave Demo Control Scheme"",
                     ""action"": ""Look"",
-                    ""isComposite"": true,
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""4b53a6ec-73ab-4110-b78e-710e7f044fe4"",
-                    ""path"": ""<Pointer>/delta/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""a3a0290d-154b-42e6-a3c0-1e246ac1cb6a"",
-                    ""path"": ""<Pointer>/delta/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -194,9 +172,9 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
 }");
         // Demo
         m_Demo = asset.FindActionMap("Demo", throwIfNotFound: true);
-        m_Demo_Hold = m_Demo.FindAction("Hold", throwIfNotFound: true);
         m_Demo_Tap = m_Demo.FindAction("Tap", throwIfNotFound: true);
         m_Demo_Look = m_Demo.FindAction("Look", throwIfNotFound: true);
+        m_Demo_Hold = m_Demo.FindAction("Hold", throwIfNotFound: true);
     }
 
     ~@CaveTouchInput()
@@ -277,9 +255,9 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
     // Demo
     private readonly InputActionMap m_Demo;
     private List<IDemoActions> m_DemoActionsCallbackInterfaces = new List<IDemoActions>();
-    private readonly InputAction m_Demo_Hold;
     private readonly InputAction m_Demo_Tap;
     private readonly InputAction m_Demo_Look;
+    private readonly InputAction m_Demo_Hold;
     /// <summary>
     /// Provides access to input actions defined in input action map "Demo".
     /// </summary>
@@ -292,10 +270,6 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         /// </summary>
         public DemoActions(@CaveTouchInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Demo/Hold".
-        /// </summary>
-        public InputAction @Hold => m_Wrapper.m_Demo_Hold;
-        /// <summary>
         /// Provides access to the underlying input action "Demo/Tap".
         /// </summary>
         public InputAction @Tap => m_Wrapper.m_Demo_Tap;
@@ -303,6 +277,10 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Demo/Look".
         /// </summary>
         public InputAction @Look => m_Wrapper.m_Demo_Look;
+        /// <summary>
+        /// Provides access to the underlying input action "Demo/Hold".
+        /// </summary>
+        public InputAction @Hold => m_Wrapper.m_Demo_Hold;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -329,15 +307,15 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_DemoActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_DemoActionsCallbackInterfaces.Add(instance);
-            @Hold.started += instance.OnHold;
-            @Hold.performed += instance.OnHold;
-            @Hold.canceled += instance.OnHold;
             @Tap.started += instance.OnTap;
             @Tap.performed += instance.OnTap;
             @Tap.canceled += instance.OnTap;
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @Hold.started += instance.OnHold;
+            @Hold.performed += instance.OnHold;
+            @Hold.canceled += instance.OnHold;
         }
 
         /// <summary>
@@ -349,15 +327,15 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         /// <seealso cref="DemoActions" />
         private void UnregisterCallbacks(IDemoActions instance)
         {
-            @Hold.started -= instance.OnHold;
-            @Hold.performed -= instance.OnHold;
-            @Hold.canceled -= instance.OnHold;
             @Tap.started -= instance.OnTap;
             @Tap.performed -= instance.OnTap;
             @Tap.canceled -= instance.OnTap;
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @Hold.started -= instance.OnHold;
+            @Hold.performed -= instance.OnHold;
+            @Hold.canceled -= instance.OnHold;
         }
 
         /// <summary>
@@ -412,13 +390,6 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
     public interface IDemoActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Hold" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnHold(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "Tap" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -432,5 +403,12 @@ public partial class @CaveTouchInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLook(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Hold" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHold(InputAction.CallbackContext context);
     }
 }

@@ -82,9 +82,9 @@ public class CAVEController : MonoBehaviour
         RaycastHit raycastHit = new RaycastHit();
         
         // Check if raycast is hitting anything, only if input gives a touch position.
-        if (context.valueType == typeof(Vector2))
+        if (context.valueType == typeof(Vector3))
         {
-            raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector2>(), cameras);
+            raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector3>(), cameras);
             if (!raycastHit.collider)
             {
                 return;
@@ -98,19 +98,24 @@ public class CAVEController : MonoBehaviour
                     //swipe is always between 1 and -1
                     float swipe = context.ReadValue<Vector2>().x;
                     cave.transform.Rotate(Vector3.down, swipe);
-                    break;
+                    break; //uses the touch pointer delta to rotate the CAVE camera.
+                
                 case TouchType.Teleport:
                     MoveCaveToClickPosition(raycastHit);
-                    break;
+                    break; //moves CAVE to touch coordinates.
+                
                 case TouchType.SpawnObjectAtPosition:
                     InstantiateRandomPrimitiveAtClickPosition(raycastHit);
-                    break;
+                    break; //Spawn random object at touch coordinates, temporary for demonstration.
+                
                 case TouchType.Touchables:
                     InteractWithTouchables(raycastHit);
-                    break;
+                    break; //prompt a function on any object tagged as a touchable.
+                
                 case TouchType.ShootProjectile:
                     InstantiateProjectile(raycastHit);
-                    break;
+                    break; //Shoot random object towards touch coordinates, temporary for demonstration.
+                
                 default:
                     Debug.LogWarning("No action selected or action not implemented.");
                     break;

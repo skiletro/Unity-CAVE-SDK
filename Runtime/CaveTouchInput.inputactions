@@ -6,19 +6,10 @@
             "id": "298daa05-e0b5-4f20-9723-8c553bdaafc1",
             "actions": [
                 {
-                    "name": "Hold",
-                    "type": "PassThrough",
-                    "id": "9dabf04f-80f3-4ce5-a3f0-d9edc801528d",
-                    "expectedControlType": "Vector2",
-                    "processors": "StickDeadzone(min=0.3,max=0.925)",
-                    "interactions": "Hold(duration=1)",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Tap",
                     "type": "PassThrough",
                     "id": "2bb4c46c-473a-418f-8867-d1de1bfbdb59",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": true
@@ -27,9 +18,18 @@
                     "name": "Look",
                     "type": "PassThrough",
                     "id": "c7bfca39-9b81-4d67-9058-6dbe0d971d47",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Delta",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Hold",
+                    "type": "PassThrough",
+                    "id": "9dabf04f-80f3-4ce5-a3f0-d9edc801528d",
+                    "expectedControlType": "Vector3",
+                    "processors": "StickDeadzone(min=0.3,max=0.925)",
+                    "interactions": "Hold(duration=1)",
                     "initialStateCheck": true
                 }
             ],
@@ -51,43 +51,21 @@
                     "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Cave Demo Control Scheme",
                     "action": "Hold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
-                    "id": "953ac7b7-592f-4aa9-9322-e5dba0bf758d",
-                    "path": "2DVector",
+                    "name": "",
+                    "id": "838887b6-8074-45ae-afc9-7bd0036d1937",
+                    "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Cave Demo Control Scheme",
                     "action": "Look",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "left",
-                    "id": "4b53a6ec-73ab-4110-b78e-710e7f044fe4",
-                    "path": "<Pointer>/delta/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "a3a0290d-154b-42e6-a3c0-1e246ac1cb6a",
-                    "path": "<Pointer>/delta/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         }
