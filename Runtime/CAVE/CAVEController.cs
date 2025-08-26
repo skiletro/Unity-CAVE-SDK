@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;//Enables necessary touch input functions
 using UnityEngine.InputSystem.EnhancedTouch;
+using Random = UnityEngine.Random;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 /// <summary>
@@ -69,45 +71,51 @@ public class CAVEController : MonoBehaviour
 
     public void HandleTouchActions(InputAction.CallbackContext context)
     { 
+        Debug.Log("HandlingTouchActions");
         // Check for left mouse button click.
         /*bool isTouchAllowed = (allowContinousTouch) ? Input.GetMouseButton(0) : Input.GetMouseButtonDown(0);
         if (!isTouchAllowed)
         {
             return;
         }*/
-
-        // Check if raycast is hitting anything.
-        RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector3>(), cameras);
-        if (!raycastHit.collider)
+        
+        RaycastHit raycastHit = new RaycastHit();
+        
+        // Check if raycast is hitting anything, only if input gives a touch position.
+        if (context.valueType == typeof(Vector2))
         {
-            return;
+            raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector2>(), cameras);
+            if (!raycastHit.collider)
+            {
+                return;
+            }
         }
 
         // Switch selected TouchType Input
-        switch (selectedTouchType)
-        {
-            case TouchType.Look:
-                //swipe is always between 1 and -1
-                float swipe = context.ReadValue<Vector2>().x;
-                Debug.Log(swipe);
-                cave.transform.Rotate(Vector3.down, swipe);
-                break;
-            case TouchType.Teleport:
-                MoveCaveToClickPosition(raycastHit); //Teleport on hold
-                break;
-            case TouchType.SpawnObjectAtPosition:
-                InstantiateRandomPrimitiveAtClickPosition(raycastHit);
-                break;
-            case TouchType.Touchables:
-                InteractWithTouchables(raycastHit);
-                break;
-            case TouchType.ShootProjectile:
-                InstantiateProjectile(raycastHit);
-                break;
-            default:
-                Debug.LogWarning("No action selected or action not implemented.");
-                break;
-        }
+            switch (selectedTouchType)
+            {
+                case TouchType.Look:
+                    //swipe is always between 1 and -1
+                    float swipe = context.ReadValue<Vector2>().x;
+                    cave.transform.Rotate(Vector3.down, swipe);
+                    break;
+                case TouchType.Teleport:
+                    MoveCaveToClickPosition(raycastHit);
+                    break;
+                case TouchType.SpawnObjectAtPosition:
+                    InstantiateRandomPrimitiveAtClickPosition(raycastHit);
+                    break;
+                case TouchType.Touchables:
+                    InteractWithTouchables(raycastHit);
+                    break;
+                case TouchType.ShootProjectile:
+                    InstantiateProjectile(raycastHit);
+                    break;
+                default:
+                    Debug.LogWarning("No action selected or action not implemented.");
+                    break;
+            }
+        
     }
 
     // This is broken, it will only work with one camera.
