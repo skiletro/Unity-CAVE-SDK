@@ -91,8 +91,7 @@ public class CAVEController : MonoBehaviour
                 float swipe = context.ReadValue<Vector2>().x;
                 Debug.Log(swipe);
                 cave.transform.Rotate(Vector3.down, swipe);
-            break;
-        
+                break;
             case TouchType.Teleport:
                 MoveCaveToClickPosition(raycastHit); //Teleport on hold
                 break;
