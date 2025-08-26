@@ -42,7 +42,8 @@ public class CAVEController : MonoBehaviour
         Teleport,               // Teleport the CAVE to the hit point
         SpawnObjectAtPosition,            // Spawn a random object at the hit point (a demo of the raycast)
         ShootProjectile,        // Shoot a projectile from the CAVE at the touch input position
-        Touchables              // Interact with Touchable.cs objects
+        Touchables,              // Interact with Touchable.cs objects
+        Look                    //Drag along CAVE walls to rotate the camera view
     };
 
     private void Update()
@@ -66,67 +67,17 @@ public class CAVEController : MonoBehaviour
 
     #region Touch Actions
 
-    public void OnTap(InputAction.CallbackContext context)
-    {
-         RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector2>(), cameras); //raycasts from each touch
-         if (!raycastHit.collider)
-         {
-             return;
-         }
-         // perform selected TouchType Input
-        switch (selectedTouchType)
-        {
-            case TouchType.Teleport:
-                MoveCaveToClickPosition(raycastHit);
-                break;
-            case TouchType.SpawnObjectAtPosition:
-                InstantiateRandomPrimitiveAtClickPosition(raycastHit);
-                break;
-            case TouchType.Touchables:
-                InteractWithTouchables(raycastHit);
-                break;
-            case TouchType.ShootProjectile:
-                InstantiateProjectile(raycastHit);
-                break;
-            default:
-                Debug.LogWarning("No action selected or action not implemented.");
-                break;
-        }
-        
-    }
-
-    public void OnLook(InputAction.CallbackContext context) //Use swipe gestures to rotate cave view
-    {
-        //swipe is always between 1 and -1
-        float swipe =  context.ReadValue<Vector2>().x;
-        Debug.Log(swipe);
-        /*if(Mathf.Abs(swipe)<0.85){ //ignore minor movements
-            return;
-        }*/
-          cave.transform.Rotate(Vector3.down, swipe);  
-    }
-
-    public void OnHold(InputAction.CallbackContext context)
-    {
-        RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector3>(), cameras); //raycasts to this hold point
-        if (!raycastHit.collider)
-        {
-            return;
-        }
-        MoveCaveToClickPosition(raycastHit); //Teleport on hold
-    }
-
-    private void HandleTouchActions()
+    public void HandleTouchActions(InputAction.CallbackContext context)
     { 
         // Check for left mouse button click.
-        bool isTouchAllowed = (allowContinousTouch) ? Input.GetMouseButton(0) : Input.GetMouseButtonDown(0);
+        /*bool isTouchAllowed = (allowContinousTouch) ? Input.GetMouseButton(0) : Input.GetMouseButtonDown(0);
         if (!isTouchAllowed)
         {
             return;
-        }
+        }*/
 
         // Check if raycast is hitting anything.
-        RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(Input.mousePosition, cameras);
+        RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector3>(), cameras);
         if (!raycastHit.collider)
         {
             return;
@@ -135,8 +86,15 @@ public class CAVEController : MonoBehaviour
         // Switch selected TouchType Input
         switch (selectedTouchType)
         {
+            case TouchType.Look:
+                //swipe is always between 1 and -1
+                float swipe = context.ReadValue<Vector2>().x;
+                Debug.Log(swipe);
+                cave.transform.Rotate(Vector3.down, swipe);
+            break;
+        
             case TouchType.Teleport:
-                MoveCaveToClickPosition(raycastHit);
+                MoveCaveToClickPosition(raycastHit); //Teleport on hold
                 break;
             case TouchType.SpawnObjectAtPosition:
                 InstantiateRandomPrimitiveAtClickPosition(raycastHit);
