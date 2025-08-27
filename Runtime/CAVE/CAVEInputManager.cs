@@ -22,9 +22,6 @@ namespace MMUCAVE
         [Header("Settings: touch Actions")] [Tooltip("Select the touch action to perform")] [SerializeField]
         private TouchType selectedTouchType = TouchType.None;
 
-        [Tooltip("Allow for either single touch or continuous touch to be enabled.")] [SerializeField]
-        private bool allowContinousTouch = true;
-
         [SerializeField] private float rotationSpeed = 100f; // Speed of rotation
 
         [Tooltip("Tooltip panel for keybind popups.")] [SerializeField]
@@ -181,30 +178,17 @@ namespace MMUCAVE
 
         #region Keyboard Input
 
-        private void CycleTouchInput()
+        public void CycleTouchInput()
         {
-            // Cycle through the touch actions
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                selectedTouchType =
-                    (TouchType)(((int)selectedTouchType + 1) % System.Enum.GetValues(typeof(TouchType)).Length);
-                string message = $"Selected Touch Type: {selectedTouchType}";
-                Debug.Log(message);
-                HandleKeybindPopup(message);
-                SwitchActionMap();
-            }
-
-            // Cycle between single touch and continous touch option.
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                allowContinousTouch = !allowContinousTouch;
-                string message = $"Allow Continous Touch: {allowContinousTouch}";
-                Debug.Log(message);
-                HandleKeybindPopup(message);
-            }
+            selectedTouchType =
+                (TouchType)(((int)selectedTouchType + 1) % System.Enum.GetValues(typeof(TouchType)).Length);
+            string message = $"Selected Touch Type: {selectedTouchType}";
+            Debug.Log(message);
+            HandleKeybindPopup(message);
+            SwitchActionMap();
         }
 
-        protected void SwitchActionMap()
+        private void SwitchActionMap()
         {
             if (selectedTouchType == TouchType.Look)
             {
