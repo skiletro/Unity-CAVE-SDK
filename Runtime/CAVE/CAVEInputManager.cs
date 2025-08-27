@@ -43,13 +43,11 @@ namespace MMUCAVE
         [Tooltip("Reference to the CAVE game object")] [SerializeField]
         private GameObject cave;
 
-
         private void Awake()
         {
             playerInput = GetComponent<PlayerInput>();
         }
-
-
+        
         #region Touch Actions
 
         public void HandleTouchActions(InputAction.CallbackContext context)
@@ -178,13 +176,11 @@ namespace MMUCAVE
 
         #region Keyboard Input
 
-        public void CycleTouchInput()
+        public void CycleTouchInput(GameObject button)
         {
-            selectedTouchType =
-                (TouchType)(((int)selectedTouchType + 1) % System.Enum.GetValues(typeof(TouchType)).Length);
+            selectedTouchType = (TouchType)(((int)selectedTouchType + 1) % System.Enum.GetValues(typeof(TouchType)).Length);
             string message = $"Selected Touch Type: {selectedTouchType}";
-            Debug.Log(message);
-            HandleKeybindPopup(message);
+            button.GetComponent<TMP_Text>().text = message;
             SwitchActionMap();
         }
 
@@ -204,7 +200,7 @@ namespace MMUCAVE
 
         #endregion
 
-        private void HandleKeybindPopup(string message)
+        /*private void HandleKeybindPopup(string message)
         {
             keybindPanel.SetActive(true);
             keybindPanel.GetComponentInChildren<TMP_Text>().text = message;
@@ -221,7 +217,7 @@ namespace MMUCAVE
             {
                 keybindPanel.SetActive(false);
             }
-        }
+        }*///depricated code
     }
 }
 
