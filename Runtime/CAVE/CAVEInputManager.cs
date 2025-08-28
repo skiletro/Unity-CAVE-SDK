@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.InputSystem;//Enables necessary touch input functions
 using Random = UnityEngine.Random;
 
@@ -19,34 +18,15 @@ namespace MMUCAVE
         [Tooltip("The touch actions available to perform")]
         private int keybindsPressedCounter = 0;
 
-        [Header("Settings: touch Actions")] [Tooltip("Select the touch action to perform")] [SerializeField]
-        private TouchType selectedTouchType = TouchType.None;
 
         [SerializeField] private float rotationSpeed = 100f; // Speed of rotation
 
         [Tooltip("Tooltip panel for keybind popups.")] [SerializeField]
         private GameObject keybindPanel;
-
-
-        private enum TouchType
-        {
-            None, // No action
-            Teleport, // Teleport the CAVE to the hit point
-            SpawnObjectAtPosition, // Spawn a random object at the hit point (a demo of the raycast)
-            ShootProjectile, // Shoot a projectile from the CAVE at the touch input position
-            Touchables, // Interact with Touchable.cs objects
-            Look //Drag along CAVE walls to rotate the camera view
-        };
-
-        PlayerInput playerInput;
+        
 
         [Tooltip("Reference to the CAVE game object")] [SerializeField]
         private GameObject cave;
-
-        private void Awake()
-        {
-            playerInput = GetComponent<PlayerInput>();
-        }
         
         #region Touch Actions
 
@@ -67,21 +47,21 @@ namespace MMUCAVE
             }
 
             // Switch selected TouchType Input
-            switch (selectedTouchType)
+            switch (InputSwitchUtility.selectedTouchType)
             {
-                case TouchType.Teleport:
+                case InputSwitchUtility.TouchType.Teleport:
                     MoveCaveToClickPosition(raycastHit);
                     break; //moves CAVE to touch coordinates.
 
-                case TouchType.SpawnObjectAtPosition:
+                case InputSwitchUtility.TouchType.SpawnObject:
                     InstantiateRandomPrimitiveAtClickPosition(raycastHit);
                     break; //Spawn random object at touch coordinates, temporary for demonstration.
 
-                case TouchType.Touchables:
+                case InputSwitchUtility.TouchType.Touchables:
                     InteractWithTouchables(raycastHit);
                     break; //prompt a function on any object tagged as a touchable.
 
-                case TouchType.ShootProjectile:
+                case InputSwitchUtility.TouchType.ShootProjectile:
                     InstantiateProjectile(raycastHit);
                     break; //Shoot random object towards touch coordinates, temporary for demonstration.
 
@@ -173,33 +153,7 @@ namespace MMUCAVE
         }
 
         #endregion
-
-        #region Keyboard Input
-
-        public void CycleTouchInput(GameObject button)
-        {
-            selectedTouchType = (TouchType)(((int)selectedTouchType + 1) % System.Enum.GetValues(typeof(TouchType)).Length);
-            string message = $"Selected Touch Type: {selectedTouchType}";
-            button.GetComponent<TMP_Text>().text = message;
-            SwitchActionMap();
-        }
-
-        private void SwitchActionMap()
-        {
-            if (selectedTouchType == TouchType.Look)
-            {
-                playerInput.actions.FindActionMap("Swipe").Enable();
-                playerInput.actions.FindActionMap("Touch").Disable();
-            }
-            else
-            {
-                playerInput.actions.FindActionMap("Swipe").Disable();
-                playerInput.actions.FindActionMap("Touch").Enable();
-            }
-        }
-
-        #endregion
-
+        
         /*private void HandleKeybindPopup(string message)
         {
             keybindPanel.SetActive(true);
