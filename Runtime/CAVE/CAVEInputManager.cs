@@ -30,16 +30,16 @@ namespace MMUCAVE
         
         #region Touch Actions
 
+        public void HandleSwipeActions(InputAction.CallbackContext context){
+               //swipe is always between 1 and -1
+            float swipe = context.ReadValue<Vector2>().x;
+            cave.transform.Rotate(Vector3.down, swipe);
+            //uses the touch pointer delta to rotate the CAVE camera.
+
+        }
         public void HandleTouchActions(InputAction.CallbackContext context)
         {
             Debug.Log(context.ReadValue<Vector2>());
-            // Check for left mouse button click.
-            /*bool isTouchAllowed = (allowContinousTouch) ? Input.GetMouseButton(0) : Input.GetMouseButtonDown(0);
-            if (!isTouchAllowed)
-            {
-                return;
-            }*/
-
             RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector2>(), cameras);
             if (!raycastHit.collider)
             {
