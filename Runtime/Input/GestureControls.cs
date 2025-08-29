@@ -108,22 +108,13 @@ public partial class @GestureControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""AnyPosition"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""e83ae035-3eb9-4d04-ad63-964f0a8b1c33"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""eebe478c-ae61-43cd-9d0b-84d7367d6d79"",
-                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""path"": ""<Touchscreen>/touch*/Press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -134,22 +125,11 @@ public partial class @GestureControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c4f22f09-4450-4d13-a494-d0e256b13b2e"",
-                    ""path"": ""<Touchscreen>/primaryTouch/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PrimaryPosition"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1414b3f4-4050-4e29-9e21-a593f5ab4f28"",
                     ""path"": ""<Touchscreen>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""AnyPosition"",
+                    ""action"": ""PrimaryPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -162,7 +142,6 @@ public partial class @GestureControls: IInputActionCollection2, IDisposable
         m_Touch = asset.FindActionMap("Touch", throwIfNotFound: true);
         m_Touch_PrimaryContact = m_Touch.FindAction("PrimaryContact", throwIfNotFound: true);
         m_Touch_PrimaryPosition = m_Touch.FindAction("PrimaryPosition", throwIfNotFound: true);
-        m_Touch_AnyPosition = m_Touch.FindAction("AnyPosition", throwIfNotFound: true);
     }
 
     ~@GestureControls()
@@ -245,7 +224,6 @@ public partial class @GestureControls: IInputActionCollection2, IDisposable
     private List<ITouchActions> m_TouchActionsCallbackInterfaces = new List<ITouchActions>();
     private readonly InputAction m_Touch_PrimaryContact;
     private readonly InputAction m_Touch_PrimaryPosition;
-    private readonly InputAction m_Touch_AnyPosition;
     /// <summary>
     /// Provides access to input actions defined in input action map "Touch".
     /// </summary>
@@ -265,10 +243,6 @@ public partial class @GestureControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Touch/PrimaryPosition".
         /// </summary>
         public InputAction @PrimaryPosition => m_Wrapper.m_Touch_PrimaryPosition;
-        /// <summary>
-        /// Provides access to the underlying input action "Touch/AnyPosition".
-        /// </summary>
-        public InputAction @AnyPosition => m_Wrapper.m_Touch_AnyPosition;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -301,9 +275,6 @@ public partial class @GestureControls: IInputActionCollection2, IDisposable
             @PrimaryPosition.started += instance.OnPrimaryPosition;
             @PrimaryPosition.performed += instance.OnPrimaryPosition;
             @PrimaryPosition.canceled += instance.OnPrimaryPosition;
-            @AnyPosition.started += instance.OnAnyPosition;
-            @AnyPosition.performed += instance.OnAnyPosition;
-            @AnyPosition.canceled += instance.OnAnyPosition;
         }
 
         /// <summary>
@@ -321,9 +292,6 @@ public partial class @GestureControls: IInputActionCollection2, IDisposable
             @PrimaryPosition.started -= instance.OnPrimaryPosition;
             @PrimaryPosition.performed -= instance.OnPrimaryPosition;
             @PrimaryPosition.canceled -= instance.OnPrimaryPosition;
-            @AnyPosition.started -= instance.OnAnyPosition;
-            @AnyPosition.performed -= instance.OnAnyPosition;
-            @AnyPosition.canceled -= instance.OnAnyPosition;
         }
 
         /// <summary>
@@ -378,12 +346,5 @@ public partial class @GestureControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPrimaryPosition(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "AnyPosition" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAnyPosition(InputAction.CallbackContext context);
     }
 }
