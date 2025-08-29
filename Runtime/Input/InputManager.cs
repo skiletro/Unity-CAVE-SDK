@@ -9,7 +9,6 @@ namespace MMUCAVE
     public class InputManager : MonoBehaviour //Could make this a singleton to get a reference to anywhere?
     {
         [SerializeField] private float minimumDistance = 100f;
-        [SerializeField] private float maximumTime = 2f;
         [SerializeField] private float inputUpdateWait = 0.1f;
         [SerializeField] private float directionThreshold = .9f;
         [SerializeField] private float tapTimeThreshold = 0.01f;
@@ -77,7 +76,7 @@ namespace MMUCAVE
             if (Mathf.Abs(_startTime - Time.time) < tapTimeThreshold)//compare start and current time
             {
                 Debug.Log("Tap");
-                caveInputManager.HandleTouchActions(context);
+                caveInputManager.HandleTouchActions(PrimaryPosition(), InputSwitchUtility.TouchTypes.Touchables);
             }
             else
             {

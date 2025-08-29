@@ -150,11 +150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd98fa36b2e58e42924673b7e9a2919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumDistance: 100
-  maximumTime: 2
-  inputUpdateWait: 0.1
+  minimumDistance: 20
+  inputUpdateWait: 0.2
   directionThreshold: 0.9
-  tapTimeThreshold: 0.3
+  tapTimeThreshold: 1
   caveInputManager: {fileID: 411030055112369545}
 --- !u!114 &411030055112369545
 MonoBehaviour:
@@ -174,6 +173,6 @@ MonoBehaviour:
   - {fileID: 4271202844790905447}
   - {fileID: 722646299900671340}
   teleportOffset: {x: 0, y: 1.425, z: 0}
-  rotationSpeed: 100
+  rotationSpeed: 10
   keybindPanel: {fileID: 0}
   cave: {fileID: 6538421750705155356}
