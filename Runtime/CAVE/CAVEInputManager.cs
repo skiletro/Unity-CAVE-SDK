@@ -33,11 +33,11 @@ namespace MMUCAVE
 
         public void RotateCAVERight()
         {
-            cave.transform.Rotate(Vector3.up, rotationSpeed); // Rotate right
+            cave.transform.Rotate(Vector3.down, rotationSpeed); // Rotate right
         }
         public void RotateCAVELeft()
         {
-            cave.transform.Rotate(Vector3.down, rotationSpeed); // Rotate left
+            cave.transform.Rotate(Vector3.up, rotationSpeed); // Rotate left
         }
         
 
@@ -53,31 +53,30 @@ namespace MMUCAVE
             //uses the touch pointer delta to rotate the CAVE camera.
 
         }*/
-        public void HandleTouchActions(InputAction.CallbackContext context)
+        public void HandleTouchActions(Vector2 position, InputSwitchUtility.TouchTypes type)
         {
-            Debug.Log(context.ReadValue<Vector2>());
-            RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(context.ReadValue<Vector2>(), cameras);
+            RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(position, cameras);
             if (!raycastHit.collider)
             {
                 return;
             }
-
+            
             // Switch selected TouchType Input
-            switch (InputSwitchUtility.selectedTouchType)
+            switch (type)
             {
-                case InputSwitchUtility.TouchType.Teleport:
+                case InputSwitchUtility.TouchTypes.Teleport:
                     MoveCaveToClickPosition(raycastHit);
                     break; //moves CAVE to touch coordinates.
 
-                case InputSwitchUtility.TouchType.SpawnObject:
+                case InputSwitchUtility.TouchTypes.SpawnObject:
                     InstantiateRandomPrimitiveAtClickPosition(raycastHit);
                     break; //Spawn random object at touch coordinates, temporary for demonstration.
 
-                case InputSwitchUtility.TouchType.Touchables:
+                case InputSwitchUtility.TouchTypes.Touchables:
                     InteractWithTouchables(raycastHit);
                     break; //prompt a function on any object tagged as a touchable.
 
-                case InputSwitchUtility.TouchType.ShootProjectile:
+                case InputSwitchUtility.TouchTypes.ShootProjectile:
                     InstantiateProjectile(raycastHit);
                     break; //Shoot random object towards touch coordinates, temporary for demonstration.
 
