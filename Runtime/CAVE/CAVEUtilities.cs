@@ -12,7 +12,7 @@ public static class CAVEUtilities
     /// 
     /// TODO: Test that this works for the floor
     /// </summary>
-    public static Camera GetCameraFormMousePosition(Vector3 mousePos, Camera[] cameras)
+    public static Camera GetCameraFromMousePosition(Vector3 mousePos, Camera[] cameras)
     {
         float screenWidth = Screen.width;
 
@@ -38,7 +38,7 @@ public static class CAVEUtilities
     /// <summary>
     /// Raycasts from the mouse position to the world, using the correct CAVE camera and returns the raycast hit.
     /// </summary>
-    public static RaycastHit RaycastFromMousePosition(Vector3  mousePos,  Camera[] cameras)
+    public static RaycastHit RaycastFromMousePosition(Vector2  mousePos,  Camera[] cameras)
     {
         // Check for left mouse button click
         if (!Input.GetMouseButton(0))
@@ -46,7 +46,7 @@ public static class CAVEUtilities
             return new RaycastHit();
         }
 
-        Camera camera = GetCameraFormMousePosition(mousePos, cameras);
+        Camera camera = GetCameraFromMousePosition(mousePos, cameras);
         if (!camera)
         {
             return new RaycastHit();

@@ -8866,16 +8866,6 @@ PrefabInstance:
       propertyPath: keybindPanel
       value: 
       objectReference: {fileID: 2080725968}
-    - target: {fileID: 46802612105210110, guid: 87afb31a55154f249bd9a3180273c734,
-        type: 3}
-      propertyPath: teleportOffset.y
-      value: 1.425
-      objectReference: {fileID: 0}
-    - target: {fileID: 46802612105210110, guid: 87afb31a55154f249bd9a3180273c734,
-        type: 3}
-      propertyPath: selectedTouchType
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 858204724780400027, guid: 87afb31a55154f249bd9a3180273c734,
         type: 3}
       propertyPath: m_LocalPosition.x
