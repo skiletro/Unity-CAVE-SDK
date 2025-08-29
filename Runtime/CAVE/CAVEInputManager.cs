@@ -27,16 +27,32 @@ namespace MMUCAVE
 
         [Tooltip("Reference to the CAVE game object")] [SerializeField]
         private GameObject cave;
+
+
+        #region Swipe Inputs
+
+        public void RotateCAVERight()
+        {
+            cave.transform.Rotate(Vector3.up, rotationSpeed); // Rotate right
+        }
+        public void RotateCAVELeft()
+        {
+            cave.transform.Rotate(Vector3.down, rotationSpeed); // Rotate left
+        }
+        
+
+        #endregion
+        
         
         #region Touch Actions
 
-        public void HandleSwipeActions(InputAction.CallbackContext context){
+        /*public void HandleSwipeActions(InputAction.CallbackContext context){
                //swipe is always between 1 and -1
             float swipe = context.ReadValue<Vector2>().x;
             cave.transform.Rotate(Vector3.down, swipe);
             //uses the touch pointer delta to rotate the CAVE camera.
 
-        }
+        }*/
         public void HandleTouchActions(InputAction.CallbackContext context)
         {
             Debug.Log(context.ReadValue<Vector2>());
