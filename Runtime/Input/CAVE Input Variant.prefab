@@ -12,8 +12,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Actions
       value: 
-      objectReference: {fileID: -944628639613478452, guid: ce4422c13e8ffec41a804234da306fc6,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: -5560601613749310831, guid: 87afb31a55154f249bd9a3180273c734,
         type: 3}
       propertyPath: m_DefaultControlScheme
@@ -89,6 +88,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2295140766261471790, guid: 87afb31a55154f249bd9a3180273c734,
+        type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8379951209906154221, guid: 87afb31a55154f249bd9a3180273c734,
         type: 3}
       propertyPath: m_Name
@@ -96,17 +100,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9165049629377717957, guid: 87afb31a55154f249bd9a3180273c734, type: 3}
+    - {fileID: -5560601613749310831, guid: 87afb31a55154f249bd9a3180273c734, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8379951209906154221, guid: 87afb31a55154f249bd9a3180273c734,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2007776355325803609}
+      addedObject: {fileID: 411030055112369545}
     - targetCorrespondingSourceObject: {fileID: 8379951209906154221, guid: 87afb31a55154f249bd9a3180273c734,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 411030055112369545}
+      addedObject: {fileID: 5120187059174069638}
   m_SourcePrefab: {fileID: 100100000, guid: 87afb31a55154f249bd9a3180273c734, type: 3}
 --- !u!20 &722646299900671340 stripped
 Camera:
@@ -138,23 +143,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3384088747715348465}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2007776355325803609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6538421750705155356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dd98fa36b2e58e42924673b7e9a2919, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimumDistance: 20
-  inputUpdateWait: 0.2
-  directionThreshold: 0.9
-  tapTimeThreshold: 1
-  caveInputManager: {fileID: 411030055112369545}
 --- !u!114 &411030055112369545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,3 +164,20 @@ MonoBehaviour:
   rotationSpeed: 10
   keybindPanel: {fileID: 0}
   cave: {fileID: 6538421750705155356}
+--- !u!114 &5120187059174069638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6538421750705155356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4cc629493cbfc41bb85768b52bd807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimumDistance: 40
+  inputUpdateWait: 0.1
+  directionThreshold: 0.9
+  tapTimeThreshold: 0.01
+  caveInputManager: {fileID: 411030055112369545}
