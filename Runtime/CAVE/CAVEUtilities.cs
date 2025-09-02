@@ -5,15 +5,7 @@ using UnityEngine;
 /// </summary>
 public static class CAVEUtilities
 {
-
-    /// <summary>
-    /// Get the camera that contains the mouse position,
-    /// Used to determine which camera the mouse is over
-    /// 
-    /// TODO: Test that this works for the floor
-    /// </summary>
-    /// 
-    public static enum TouchTypes
+    public static enum TouchTypes //Types of touch input that can be handled
     {
         None, // No action
         Teleport, // Teleport the CAVE to the hit point
@@ -24,11 +16,13 @@ public static class CAVEUtilities
     };
 
     public static Camera GetCameraFromScreenPosition(Vector3 pos, Camera[] cameras)
-    {
+    {	// Get the camera that contains the mouse position,
+       	// Used to determine which camera the mouse is over
         float screenWidth = Screen.width;
 
         for (int i = 0; i < cameras.Length; i++)
         {
+			// Check each camera on the CAVE
             Camera cam = cameras[i];
             Rect viewportRect = cam.rect;
 
@@ -37,7 +31,7 @@ public static class CAVEUtilities
 
             if (screenRect.Contains(pos))
             {
-                return cam;
+                return cam;// If the position passed in is within that camera, return a reference to it
             }
         }
 
@@ -47,7 +41,7 @@ public static class CAVEUtilities
 
 
     /// <summary>
-    /// Raycasts from the mouse position to the world, using the correct CAVE camera and returns the raycast hit.
+    /// Raycasts from the given position to the corresponding world point, uses the correct CAVE camera for accurate results and returns the raycast hit
     /// </summary>
     public static RaycastHit RaycastFromScreenPosition(Vector2  pos,  Camera[] cameras)
     {
