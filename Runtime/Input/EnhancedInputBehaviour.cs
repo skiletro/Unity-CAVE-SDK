@@ -55,7 +55,7 @@ namespace MMUCAVE
             if (Mathf.Abs(_startTimes[finger.index] - Time.time) < tapTimeThreshold)//Compare start and current time
             {
                 //If the time passed is less than what is required for a hold then respond to a tap
-                caveInputManager.HandleTouchActions(finger.currentTouch.screenPosition, InputSwitchUtility.TouchTypes.Touchables);
+                caveInputManager.HandleTouchActions(finger.currentTouch.screenPosition, CAVEUtilities.TouchTypes.Touchables);
             }
             else
             {
@@ -88,7 +88,7 @@ namespace MMUCAVE
             }
             else{
                 // vv THE INTERACTION A NON-SWIPE CORRESPONDS TO vv
-                caveInputManager.HandleTouchActions(finger.currentTouch.screenPosition, InputSwitchUtility.TouchTypes.Touchables);//In this example it activates any touchables tapped
+                caveInputManager.HandleTouchActions(finger.currentTouch.screenPosition, CAVEUtilities.TouchTypes.Touchables);//In this example it activates any touchables tapped
             }
         }
 

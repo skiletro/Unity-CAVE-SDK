@@ -12,6 +12,17 @@ public static class CAVEUtilities
     /// 
     /// TODO: Test that this works for the floor
     /// </summary>
+    /// 
+    public static enum TouchTypes
+    {
+        None, // No action
+        Teleport, // Teleport the CAVE to the hit point
+        SpawnObject, // Spawn a random object at the hit point (a demo of the raycast)
+        ShootProjectile, // Shoot a projectile from the CAVE at the touch input position
+        Touchables, // Interact with Touchable.cs objects
+        Look //Drag along CAVE walls to rotate the camera view
+    };
+    public static TouchTypes selectedTouchType = TouchTypes.Touchables;
     public static Camera GetCameraFromMousePosition(Vector3 mousePos, Camera[] cameras)
     {
         float screenWidth = Screen.width;
