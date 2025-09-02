@@ -12,9 +12,6 @@ namespace MMUCAVE
         [Header("References")] [Tooltip("Reference to the cameras in the CAVE")] [SerializeField]
         private Camera[] cameras;
 
-        [Tooltip("Offset to move the CAVE to after the hit point")] [SerializeField]
-        private Vector3 teleportOffset = new(0, 1.425f, 0); // Offset to move the CAVE to the hit point
-
         [Tooltip("The touch actions available to perform")]
         private int keybindsPressedCounter = 0;
 
@@ -89,7 +86,7 @@ namespace MMUCAVE
         // This is broken, it will only work with one camera.
         private void MoveCaveToClickPosition(RaycastHit hit)
         {
-            cave.transform.position = hit.point + teleportOffset; // Move the CAVE to the hit point
+            cave.transform.position = hit.point; // Move the CAVE to the hit point
         }
 
 

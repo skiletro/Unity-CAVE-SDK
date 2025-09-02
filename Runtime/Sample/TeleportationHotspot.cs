@@ -8,11 +8,7 @@ public class TeleportationHotspot : MonoBehaviour
 {
     [Tooltip("The GameObject to teleport")]
     [SerializeField] private GameObject objectToTeleport;
-
     
-
-    [Tooltip("The position to teleport to relative to this GameObject")]
-    [SerializeField] private Vector3 positionOffset = new Vector3(0, 1.425f, 0); // Default CAVE height
 
     [Tooltip("The rotation to teleport to relative to this GameObject")]
     [SerializeField] private Vector3 rotationOffset;
@@ -59,7 +55,7 @@ public class TeleportationHotspot : MonoBehaviour
             return;
         }
 
-        objectToTeleport.transform.position = transform.position + positionOffset;
+        objectToTeleport.transform.position = transform.position;
         objectToTeleport.transform.rotation = Quaternion.Euler(rotationOffset);
     }
 
