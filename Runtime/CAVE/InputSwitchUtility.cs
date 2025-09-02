@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class InputSwitchUtility : MonoBehaviour
 {
-    public enum TouchType
+    public enum TouchTypes
     {
         None, // No action
         Teleport, // Teleport the CAVE to the hit point
@@ -18,7 +18,7 @@ public class InputSwitchUtility : MonoBehaviour
     };
 
     [Header("Settings: touch Actions")] [Tooltip("Select the touch action to perform")] [SerializeField]
-    public static TouchType selectedTouchType = TouchType.None;
+    public static TouchTypes selectedTouchType = TouchTypes.Touchables;
 
     [SerializeField]private PlayerInput playerInput;
     [SerializeField]private GameObject label;
@@ -26,10 +26,10 @@ public class InputSwitchUtility : MonoBehaviour
 
     public void CycleTouchInput(string touchType)
     {
-        selectedTouchType = Enum.TryParse<TouchType>(touchType, true, out var result) ? result : TouchType.None; //check if passed string matches a touch type
+        selectedTouchType = Enum.TryParse<TouchTypes>(touchType, true, out var result) ? result : TouchTypes.None; //check if passed string matches a touch type
         string message = $"Selected Touch Type: {selectedTouchType}"; //change UI label to display current touch type
         label.GetComponent<TMP_Text>().text = message;
-        if (result == TouchType.Look) 
+        if (result == TouchTypes.Look) 
         {
             EnableSwipeActionMap();// if touch type is look, enable swiping
         }

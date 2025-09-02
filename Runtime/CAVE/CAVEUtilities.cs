@@ -40,18 +40,11 @@ public static class CAVEUtilities
     /// </summary>
     public static RaycastHit RaycastFromMousePosition(Vector2  mousePos,  Camera[] cameras)
     {
-        // Check for left mouse button click
-        if (!Input.GetMouseButton(0))
-        {
-            return new RaycastHit();
-        }
-
         Camera camera = GetCameraFromMousePosition(mousePos, cameras);
         if (!camera)
         {
             return new RaycastHit();
         }
-
         Ray ray = camera.ScreenPointToRay(mousePos);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
