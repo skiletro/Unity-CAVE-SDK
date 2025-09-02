@@ -1,20 +1,11 @@
 using UnityEngine;
 
+/// vv DEMO BEHAVIOUR vv
+
 public class HandleMidCameraUi : MonoBehaviour
 {
+	// Simply disables the start menu screen when the button is pressed
     [SerializeField] private GameObject startPanel;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnStartCaveButtonClick()
     {
