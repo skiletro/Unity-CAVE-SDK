@@ -21,7 +21,7 @@ namespace MMUCAVE
         [Tooltip("How frequently to check for changes in the input, lower = more frequent")][SerializeField] private float inputUpdateWait = 0.1f;
         [Tooltip("The percentage of similarity a swipe must have to register a cardinal direction")][SerializeField] private float directionThreshold = .9f;
         [Tooltip("The minimum time that must pass before a tap becomes a hold")] [SerializeField] private float tapTimeThreshold = 0.01f;
-        private Vector2[] _lastPositions = new Vector2[maxInputCount]//Stores the position of the touch at last coroutine pass
+        private Vector2[] _lastPositions = new Vector2[maxInputCount];//Stores the position of the touch at last coroutine pass
         private Vector2[]_directions = new Vector2[maxInputCount];//Stores the direction of each touch if it is a swipe
         private float[] _startTimes = new float[maxInputCount];//Stores the time each touch was started
         private Coroutine[] _coroutines = new Coroutine[maxInputCount];//Holds references to the TouchUpdate coroutines
@@ -69,7 +69,7 @@ namespace MMUCAVE
         private IEnumerator TouchUpdate(Finger finger)
         {
             while (true)
-            
+            {
                 _directions[finger.index] = Vector2.zero;//Reset stored direction from last pass
                 DetectSwipe(finger); //Check for a swipe
                 _lastPositions[finger.index] = finger.currentTouch.screenPosition;//Update stored position for next pass

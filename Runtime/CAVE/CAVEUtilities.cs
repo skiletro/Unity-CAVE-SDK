@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public static class CAVEUtilities
 {
-    public static enum TouchTypes //Types of touch input that can be handled
+    public enum TouchTypes //Types of touch input that can be handled
     {
         None, // No action
         Teleport, // Teleport the CAVE to the hit point

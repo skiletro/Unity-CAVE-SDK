@@ -58,7 +58,7 @@ namespace MMUCAVE
             // Switch selected TouchType Input
             switch (type)
             {
-                case CAVEUtilitiesTouchTypes.Teleport:
+                case CAVEUtilities.TouchTypes.Teleport:
                     MoveCaveToClickPosition(raycastHit);
                     break; //Moves CAVE to touch coordinates.
 
@@ -125,7 +125,7 @@ namespace MMUCAVE
         // Create a projectile and fire it from the CAVE towards the hit point
         private void InstantiateProjectile(RaycastHit hit)
         {
-            List of available primitive types for the projectile
+            //List of available primitive types for the projectile
             PrimitiveType[] primitiveTypes = new PrimitiveType[]
             {
                 PrimitiveType.Cube,
@@ -147,7 +147,7 @@ namespace MMUCAVE
             
             Vector3 direction =
                 (hit.point - cave.transform.position).normalized; // Calculate direction to the hit point
-            rb.velocity = direction * 20f; // Set linear velocity of the projectile
+            rb.linearVelocity = direction * 20f; // Set linear velocity of the projectile
       
      	  }
 		#endregion
