@@ -8,29 +8,24 @@ namespace MMUCAVE
 {
     public class CAVEInputManager : MonoBehaviour
     {
+		/// <summary>
+		/// Manages the in-world reactions to any input given by the input handler class.
+		/// </summary>
 
         [Header("References")] [Tooltip("Reference to the cameras in the CAVE")] [SerializeField]
-        private Camera[] cameras;
+        private Camera[] cameras; //All cameras
 
         [Tooltip("Offset to move the CAVE to after the hit point")] [SerializeField]
-        private Vector3 teleportOffset = new(0, 1.425f, 0); // Offset to move the CAVE to the hit point
+        private Vector3 teleportOffset = new(0, 1.425f, 0); // Offset when moving the CAVE to the hit point
 
-        [Tooltip("The touch actions available to perform")]
-        private int keybindsPressedCounter = 0;
-
-
-        [SerializeField] private float rotationSpeed = 100f; // Speed of rotation
-
-        [Tooltip("Tooltip panel for keybind popups.")] [SerializeField]
-        private GameObject keybindPanel;
-        
-
+        [Tooltip("The speed at which the CAVE will rotate when swiping")][SerializeField] private float rotationSpeed = 100f; // Speed of rotation
+     
         [Tooltip("Reference to the CAVE game object")] [SerializeField]
-        private GameObject cave;
+        private GameObject cave; // Reference to the CAVE
 
 
         #region Swipe Inputs
-
+		/// Could be combined into a generic rotate direction function? ///
         public void RotateCAVERight()
         {
             cave.transform.Rotate(Vector3.down, rotationSpeed); // Rotate right
@@ -48,10 +43,16 @@ namespace MMUCAVE
 
         public void HandleTouchActions(Vector2 position, CAVEUtilities.TouchTypes type)
         {
+
+		/// <summary>
+		/// Generic input handler, takes in a position and touch type, outputs relevant function call
+		/// </summary>
+
             RaycastHit raycastHit = CAVEUtilities.RaycastFromScreenPosition(position, cameras);
+			// Gets reference to the object at the touched position
             if (!raycastHit.collider)
             {
-                return;
+                return; // If there is no object, return nothing
             }
             
             // Switch selected TouchType Input
@@ -59,7 +60,7 @@ namespace MMUCAVE
             {
                 case CAVEUtilitiesTouchTypes.Teleport:
                     MoveCaveToClickPosition(raycastHit);
-                    break; //moves CAVE to touch coordinates.
+                    break; //Moves CAVE to touch coordinates.
 
                 case CAVEUtilities.TouchTypes.SpawnObject:
                     InstantiateRandomPrimitiveAtClickPosition(raycastHit);
@@ -67,7 +68,7 @@ namespace MMUCAVE
 
                 case CAVEUtilities.TouchTypes.Touchables:
                     InteractWithTouchables(raycastHit);
-                    break; //prompt a function on any object tagged as a touchable.
+                    break; //Prompt a function on any object that contains the touchable class.
 
                 case CAVEUtilities.TouchTypes.ShootProjectile:
                     InstantiateProjectile(raycastHit);
@@ -75,16 +76,26 @@ namespace MMUCAVE
 
                 default:
                     Debug.LogWarning("No action selected or action not implemented.");
-                    break;
+                    break; //Logs an error if a correct touch type is not given
             }
         }
 
-        // This is broken, it will only work with one camera.
         private void MoveCaveToClickPosition(RaycastHit hit)
         {
             cave.transform.position = hit.point + teleportOffset; // Move the CAVE to the hit point
         }
 
+        private void InteractWithTouchables(RaycastHit hit)
+        {
+            // Check if the object has a Touchable component.
+            Touchable touchable = hit.collider.GetComponent<Touchable>();
+            if (touchable)
+            {
+                touchable.OnTouch(); // Call the OnTouch method on the Touchable component
+            }
+        }
+
+		#region Demo behaviour
 
         // Spawns a random primitive at the hit point
         private void InstantiateRandomPrimitiveAtClickPosition(RaycastHit hit)
@@ -111,22 +122,11 @@ namespace MMUCAVE
             primitive.AddComponent<Rigidbody>();
         }
 
-
-        private void InteractWithTouchables(RaycastHit hit)
-        {
-            // Check if the object has a Touchable component.
-            Touchable touchable = hit.collider.GetComponent<Touchable>();
-            if (touchable)
-            {
-                touchable.OnTouch(); // Call the OnTouch method on the Touchable component
-            }
-        }
-
         // Create a projectile and fire it from the CAVE towards the hit point
         private void InstantiateProjectile(RaycastHit hit)
         {
-            // List of available primitive types for the projectile
-            /*PrimitiveType[] primitiveTypes = new PrimitiveType[]
+            List of available primitive types for the projectile
+            PrimitiveType[] primitiveTypes = new PrimitiveType[]
             {
                 PrimitiveType.Cube,
                 PrimitiveType.Sphere,
@@ -144,42 +144,14 @@ namespace MMUCAVE
             Rigidbody rb = projectile.AddComponent<Rigidbody>(); // Add a Rigidbody to the projectile
             rb.collisionDetectionMode =
                 CollisionDetectionMode.ContinuousDynamic; // Set collision detection mode for better accuracy
-
-            // Add physics material to the projectile
-
-            PhysicsMaterial physicsMaterial = new PhysicsMaterial();
-            physicsMaterial.bounciness = 0.5f; // Set bounciness
-            physicsMaterial.dynamicFriction = 0.5f; // Set dynamic friction
-            physicsMaterial.staticFriction = 0.5f; // Set static friction
-            projectile.GetComponent<Collider>().material =
-                physicsMaterial; // Assign the physics material to the projectile's collider
-
+            
             Vector3 direction =
                 (hit.point - cave.transform.position).normalized; // Calculate direction to the hit point
-            rb.linearVelocity = direction * 20f; // Set linear velocity of the projectile
-        */
-        }
-
-        #endregion
-        
-        /*private void HandleKeybindPopup(string message)
-        {
-            keybindPanel.SetActive(true);
-            keybindPanel.GetComponentInChildren<TMP_Text>().text = message;
-            StartCoroutine(HandleKeybindPopupTimer());
-        }
-
-        IEnumerator HandleKeybindPopupTimer()
-        {
-            keybindsPressedCounter++;
-            yield return new WaitForSeconds(2);
-            keybindsPressedCounter--;
-            Debug.Log(keybindsPressedCounter);
-            if (keybindsPressedCounter == 0)
-            {
-                keybindPanel.SetActive(false);
-            }
-        }*///depricated code
+            rb.velocity = direction * 20f; // Set linear velocity of the projectile
+      
+     	  }
+		#endregion
+       #endregion
     }
 }
 
