@@ -48,7 +48,7 @@ namespace MMUCAVE
 
         public void HandleTouchActions(Vector2 position, CAVEUtilities.TouchTypes type)
         {
-            RaycastHit raycastHit = CAVEUtilities.RaycastFromMousePosition(position, cameras);
+            RaycastHit raycastHit = CAVEUtilities.RaycastFromScreenPosition(position, cameras);
             if (!raycastHit.collider)
             {
                 return;

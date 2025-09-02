@@ -22,8 +22,8 @@ public static class CAVEUtilities
         Touchables, // Interact with Touchable.cs objects
         Look //Drag along CAVE walls to rotate the camera view
     };
-    public static TouchTypes selectedTouchType = TouchTypes.Touchables;
-    public static Camera GetCameraFromMousePosition(Vector3 mousePos, Camera[] cameras)
+
+    public static Camera GetCameraFromScreenPosition(Vector3 pos, Camera[] cameras)
     {
         float screenWidth = Screen.width;
 
@@ -35,7 +35,7 @@ public static class CAVEUtilities
             // Calculate the screen rect for the camera
             Rect screenRect = new Rect(viewportRect.x * screenWidth, viewportRect.y * Screen.height, viewportRect.width * screenWidth, viewportRect.height * Screen.height);
 
-            if (screenRect.Contains(mousePos))
+            if (screenRect.Contains(pos))
             {
                 return cam;
             }
@@ -49,14 +49,14 @@ public static class CAVEUtilities
     /// <summary>
     /// Raycasts from the mouse position to the world, using the correct CAVE camera and returns the raycast hit.
     /// </summary>
-    public static RaycastHit RaycastFromMousePosition(Vector2  mousePos,  Camera[] cameras)
+    public static RaycastHit RaycastFromScreenPosition(Vector2  pos,  Camera[] cameras)
     {
-        Camera camera = GetCameraFromMousePosition(mousePos, cameras);
+        Camera camera = GetCameraFromScreenPosition(pos, cameras);
         if (!camera)
         {
             return new RaycastHit();
         }
-        Ray ray = camera.ScreenPointToRay(mousePos);
+        Ray ray = camera.ScreenPointToRay(pos);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             return hit;
