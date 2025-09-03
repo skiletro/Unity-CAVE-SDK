@@ -1,5 +1,7 @@
 using UnityEngine;
 
+/// vv DEMO BEHAVIOUR vv
+
 /// <summary>
 /// Controls the game menu's visibility and animation.
 /// </summary>

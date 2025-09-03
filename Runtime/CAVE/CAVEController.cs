@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// General controller for the CAVE system.
+/// General movement controller for the CAVE system.
 /// </summary>
 namespace MMUCAVE
 {
@@ -11,21 +11,21 @@ namespace MMUCAVE
     {
 
         [Tooltip("Reference to the CAVE game object")] [SerializeField]
-        private GameObject cave;
+        private GameObject cave; //Reference to the CAVE
 
-        [Header("Settings: Movement")] [SerializeField]
-        private float movementSpeed = 10f; // Speed of movement
-        [SerializeField] private float rotationSpeed = 100f; // Speed of rotation
+        [Header("Settings: Movement")]
+        [Tooltip("Keyboard controlled movement speed")] [SerializeField] private float movementSpeed = 10f; // Speed of movement
+        [Tooltip("Keyboard controlled rotation speed")] [SerializeField] private float rotationSpeed = 100f; // Speed of rotation
 
         private void Update()
         {
-            Quit();
+            Quit(); // Check whether to close the application
         }
 
         private void FixedUpdate()
         {
-            HandleMovementInput();
-            HandleRotationInput();
+            HandleMovementInput();// Check for movement input from the keyboard
+            HandleRotationInput();// Check for rotation input from the keyboard
         }
         
 
