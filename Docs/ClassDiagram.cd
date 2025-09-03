@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Input">
+    <Position X="11.483" Y="0.5" Height="0.291" Width="0.7" />
+  </Comment>
+  <Comment CommentText="Core">
+    <Position X="4.361" Y="0.5" Height="0.291" Width="0.7" />
+  </Comment>
+  <Comment CommentText="UI">
+    <Position X="8.446" Y="0.517" Height="0.291" Width="0.7" />
+  </Comment>
+  <Class Name="GameMenuController" Collapsed="true">
+    <Position X="8" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIBAAAAAADAAAAIIAAAAAAAAAAAAAAAAAAAAIAEA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\GameMenuController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HandleMidCameraUi" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\HandleMidCameraUi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MMUCAVE.EnhancedInputBehaviour">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAEAAAABAAABAAAAIQAQBEQIAAAIAAACBAAICAg=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Input\EnhancedInputBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MMUCAVE.InteractionObject">
+    <Position X="12.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Input\InteractionObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MMUCAVE.CAVEController" Collapsed="true">
+    <Position X="3.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAgwAAAAAAAAAAAAAAAAAAAAAIAABAAAAAAQA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\CAVE\CAVEController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MMUCAVE.CAVEInputManager" Collapsed="true">
+    <Position X="10.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAhACAAAEBAAAAQBAAAAEAAAAIAABAgAAAAAg=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\CAVE\CAVEInputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAVEUtilities" Collapsed="true">
+    <Position X="5.5" Y="4.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="CAVEUtilities.TouchTypes" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\CAVE\CAVEUtilities.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\CAVE\CAVEUtilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisplayEnabler" Collapsed="true">
+    <Position X="5.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\CAVE\DisplayEnabler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectileCannon">
+    <Position X="12" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgCAAAABAAAAAACAABAAAAQAAAIAAAQAAAAAgAAAAA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Sample\ProjectileCannon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TeleportationHotspot">
+    <Position X="13.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAEAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Sample\TeleportationHotspot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneTransitioner" Collapsed="true">
+    <Position X="8" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAACQA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Sample\SceneTransitioner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TransformFoller" Collapsed="true">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Sample\TransformFoller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TransformLocker" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAgAAIAIBAAAAAAAAAAAAAAAABAAAQ=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Sample\TransformLocker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VideoController" Collapsed="true">
+    <Position X="2" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAEAACAKQBAAjIJCAAJCCQIAACAAEAAUAEAAOAg=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Sample\VideoController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Apt.Unity.Projection.AutoMoveTracker" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAACAAAAAAAAAAAAAAAGAAAAgABAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Projection\AutoMoveTracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Apt.Unity.Projection.BasicMovement" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Projection\BasicMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Apt.Unity.Projection.KeyboardTracker" Collapsed="true">
+    <Position X="2" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAgAAAAAAAAABAACAAAAAAA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Projection\KeyboardTracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Apt.Unity.Projection.ProjectionPlane" Collapsed="true">
+    <Position X="5.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AxQECBgYACgAgBgAAhQAQAQAAACIAAGAIkAAAAoAAEA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Projection\ProjectionPlane.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Apt.Unity.Projection.ProjectionPlaneCamera" Collapsed="true">
+    <Position X="3.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAEBIQAAAAAAEEAAAAAIAAAAAgAgAAUFQQBAAAAAEE=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Projection\ProjectionPlaneCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Apt.Unity.Projection.TrackerBase" Collapsed="true">
+    <Position X="2" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAIAAAACAAAgAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>C:\Users\46068779\Desktop\Unity-CAVE-SDK\Runtime\Projection\TrackerBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
