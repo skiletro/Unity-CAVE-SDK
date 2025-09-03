@@ -18,9 +18,6 @@ namespace MMUCAVE
         [Tooltip("The touch actions available to perform")]
         private int keybindsPressedCounter = 0;
 
-
-        [SerializeField] private float rotationSpeed = 100f; // Speed of rotation
-
         [Tooltip("Tooltip panel for keybind popups.")] [SerializeField]
         private GameObject keybindPanel;
 
@@ -95,16 +92,6 @@ namespace MMUCAVE
         {
             // Check if the object has a Touchable component.
             InteractionObject touchable = hit.collider.GetComponent<InteractionObject>();
-            if (touchable)
-            {
-                touchable.OnTouch(); // Call the OnTouch method on the Touchable component
-            }
-        }
-
-        private void InteractWithTouchables(RaycastHit hit)
-        {
-            // Check if the object has a Touchable component.
-            Touchable touchable = hit.collider.GetComponent<Touchable>();
             if (touchable)
             {
                 touchable.OnTouch(); // Call the OnTouch method on the Touchable component
