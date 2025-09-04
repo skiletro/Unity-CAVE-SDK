@@ -3,7 +3,7 @@ using UnityEngine;
 namespace MMUCAVE
 {
     /// <summary>
-    /// All Interaction Objects respond to being tapped through implementation of OnTouch.
+    /// All classes that inherit from InteractionObject respond to being tapped through implementation of OnTouch.
     /// <u>Requires a collider on the object</u>
     /// </summary>
     public abstract class InteractionObject : MonoBehaviour
