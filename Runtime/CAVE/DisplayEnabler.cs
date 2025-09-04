@@ -1,9 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// manually enable all required screens for accurate CAVE projection
+/// </summary>
 public class DisplayEnabler : MonoBehaviour
 {
-    #if UNITY_STANDALONE && !UNITY_EDITOR
-    // When running in a build, manually enable all screens for accurate projection
+    #if UNITY_STANDALONE && !UNITY_EDITOR //Only run this script within the build
         [Tooltip("Number of displays connected to the system (-1 for indexing)")][SerializeField] private int displayIndex = 0;
         
         private void OnEnable()
