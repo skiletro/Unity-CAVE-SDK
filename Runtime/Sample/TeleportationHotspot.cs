@@ -6,26 +6,24 @@ using System.Collections.Generic;
 using MMUCAVE;
 using UnityEngine.Serialization;
 
+/// <summary>
+/// Example Interaction Object that teleports the CAVE to its location when tapped.
+/// </summary>
 public class TeleportationHotspot : InteractionObject
 {
-    [FormerlySerializedAs("objectToTeleport")]
     [Tooltip("A reference to the CAVE")]
-    [SerializeField] private GameObject CAVE;
+    [SerializeField] private GameObject cave;
 
-    [Tooltip("The rotation to teleport to relative to this GameObject")]
+    [Tooltip("The rotation to adjust by when moving to this hotspot")]
     [SerializeField] private Vector3 rotationOffset;
 
+    /// <summary>
+    /// Teleports the CAVE to this location
+    /// </summary>
     public override void OnTouch()
     {
-        if (CAVE == null)
-        {
-            Debug.LogError("Object to teleport is null");
-            return;
-        }
-
-        CAVE.transform.position = transform.position;
-        CAVE.transform.rotation = Quaternion.Euler(rotationOffset);
-
+        cave.transform.position = transform.position;//Moves the CAVE to the position of the hotspot
+        cave.transform.rotation = Quaternion.Euler(rotationOffset);//Rotates the CAVE to account for the hotspot's own rotation
     }
 
 }
