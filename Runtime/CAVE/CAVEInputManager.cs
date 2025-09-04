@@ -18,9 +18,6 @@ namespace MMUCAVE
         [Tooltip("The touch actions available to perform")]
         private int keybindsPressedCounter = 0;
 
-
-        [SerializeField] private float rotationSpeed = 100f; // Speed of rotation
-
         [Tooltip("Tooltip panel for keybind popups.")] [SerializeField]
         private GameObject keybindPanel;
 
