@@ -98,16 +98,6 @@ namespace MMUCAVE
             }
         }
 
-        private void InteractWithTouchables(RaycastHit hit)
-        {
-            // Check if the object has a Touchable component.
-            Touchable touchable = hit.collider.GetComponent<Touchable>();
-            if (touchable)
-            {
-                touchable.OnTouch(); // Call the OnTouch method on the Touchable component
-            }
-        }
-
 		#region Demo behaviour
 
         // Spawns a random primitive at the hit point
