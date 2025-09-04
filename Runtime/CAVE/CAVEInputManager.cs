@@ -1,41 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;//Enables necessary touch input functions
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 namespace MMUCAVE
 {
+    /// <summary> 
+    /// Manages the in-world reactions to any input given by the input handler class.
+ 	/// </summary>
     public class CAVEInputManager : MonoBehaviour
     {
-		/// <summary>
-		/// Manages the in-world reactions to any input given by the input handler class.
-		/// </summary>
+        [Tooltip("Reference to the cameras in the CAVE")] [SerializeField]
+        private Camera[] cameras;
 
-        [Header("References")] [Tooltip("Reference to the cameras in the CAVE")] [SerializeField]
-        private Camera[] cameras; //All cameras
-
-        [Tooltip("The touch actions available to perform")]
-        private int keybindsPressedCounter = 0;
-
-        [Tooltip("Tooltip panel for keybind popups.")] [SerializeField]
-        private GameObject keybindPanel;
-
-        [Tooltip("The speed at which the CAVE will rotate when swiping")][SerializeField] private float rotationSpeed = 100f; // Speed of rotation
+        [Tooltip("The speed at which the CAVE will rotate when swiping")][SerializeField]
+        private float rotationSpeed = 100f;
      
         [Tooltip("Reference to the CAVE game object")] [SerializeField]
-        private GameObject cave; // Reference to the CAVE
+        private GameObject cave;
 
 
         #region Swipe Inputs
 		/// Could be combined into a generic rotate direction function? ///
-        public void RotateCAVERight()
+        public void RotateCAVE(Vector3 direction)
         {
-            cave.transform.Rotate(Vector3.down, rotationSpeed); // Rotate right
-        }
-        public void RotateCAVELeft()
-        {
-            cave.transform.Rotate(Vector3.up, rotationSpeed); // Rotate left
+            cave.transform.Rotate(direction, rotationSpeed); // Rotate view
         }
         
 
@@ -43,14 +33,9 @@ namespace MMUCAVE
         
         
         #region Touch Actions
-
+        /// <summary> Generic input handler, takes in a position and touch type, outputs relevant function call </summary>
         public void HandleTouchActions(Vector2 position, CAVEUtilities.TouchTypes type)
         {
-
-		/// <summary>
-		/// Generic input handler, takes in a position and touch type, outputs relevant function call
-		/// </summary>
-
             RaycastHit raycastHit = CAVEUtilities.RaycastFromScreenPosition(position, cameras);
 			// Gets reference to the object at the touched position
             if (!raycastHit.collider)
