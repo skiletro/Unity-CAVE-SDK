@@ -2,10 +2,12 @@ using System.Collections;
 using MMUCAVE;
 using UnityEngine;
 
+/// <summary>
+/// Spawns objects with an outward velocity when pressed.
+/// </summary>
 public class ProjectileCannon : InteractionObject
 {
     [Header("References")]
-
     [Tooltip("The spawn point transform")]
     [SerializeField] private Transform spawnPoint;
 
@@ -26,7 +28,11 @@ public class ProjectileCannon : InteractionObject
     [Tooltip("The cooldown between uses of the projectile cannon.")]
     [SerializeField] private float cooldownTimer = 0.1f;
     
-    private bool isRateLimited = false;
+    private bool isRateLimited = false; // Used within the coroutine to implement rate limiting
+
+    /// <summary>
+    /// Spawns projectile objects.
+    /// </summary>
     public override void OnTouch()
     {
         // Error handling
@@ -36,6 +42,8 @@ public class ProjectileCannon : InteractionObject
             Debug.LogError($"{name} - Projectile prefab is not assigned!");
         if (maxRandomFireCount < 1)
             Debug.LogError($"{name} - Fire count must be greater than 0!");
+
+        //Handles whether rate limiting should be implemented
         if (isRateLimited) 
             return;
         if (allowRateLimiting)
@@ -55,7 +63,7 @@ public class ProjectileCannon : InteractionObject
         }
     }
 
-    // Allows for the cannon to only fire every 0.1s.
+    // Allows for the cannon to only fire every 0.1s
     private IEnumerator HandleRateLimiting()
     {
         isRateLimited = true;
