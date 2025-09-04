@@ -1,25 +1,25 @@
 using UnityEngine;
 
-/// vv DEMO BEHAVIOUR vv
 
 /// <summary>
-/// Controls the game menu's visibility and animation.
+/// vv UNUSED DEMO BEHAVIOUR vv
+/// <br>Controls the game menu's visibility and animation.</br>
 /// </summary>
 public class GameMenuController : MonoBehaviour
 {
-    [SerializeField]
+    [Tooltip("The RectTransform component of the menu.")][SerializeField]
     private RectTransform gameMenuRectTransform;
 
-    [SerializeField]
+    [Tooltip("The position of the menu when shown")][SerializeField]
     private Vector3 gameMenuShownPos;
 
-    [SerializeField]
+    [Tooltip("The position of the menu when hidden")][SerializeField]
     private Vector3 gameMenuHiddenPos;
 
-    [SerializeField]
+    [Tooltip("Time the menu takes to move")][SerializeField]
     private float lerpTime = 1f;
-    
-    [SerializeField]
+
+    [Tooltip("Whether the menu is shown")][SerializeField]
     private bool isGameMenuShown = true;
 
     private float currentLerpTime;
@@ -27,8 +27,9 @@ public class GameMenuController : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Tab))
+        {
             ToggleGameMenu();
-        
+        }
         HandleMenuAnimation();
     }
 
