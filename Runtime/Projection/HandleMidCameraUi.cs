@@ -1,6 +1,6 @@
 using UnityEngine;
 
-/// vv DEMO BEHAVIOUR vv
+///<summary> vv DEMO BEHAVIOUR vv <br> Disables start panel when button pressed. </br> </summary>
 
 public class HandleMidCameraUi : MonoBehaviour
 {
@@ -9,6 +9,6 @@ public class HandleMidCameraUi : MonoBehaviour
 
     public void OnStartCaveButtonClick()
     {
-        startPanel.SetActive(false);
+        startPanel.SetActive(false);//disable spart panel
     }
 }
