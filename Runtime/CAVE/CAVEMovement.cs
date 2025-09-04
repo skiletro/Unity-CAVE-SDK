@@ -3,12 +3,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+    
+namespace MMUCAVE
+{
     /// <summary>
     /// General movement controller for the CAVE system.
     /// </summary>
-
-namespace MMUCAVE
-{
     public class CAVEMovement : MonoBehaviour
     {
         //Stores the directions passed from the input action callback for use with FixedUpdate.
@@ -28,11 +28,19 @@ namespace MMUCAVE
             cave.transform.Rotate(rotateDirection * (rotationSpeed * Time.fixedDeltaTime));
         }
 
+        /// <summary>
+        /// Uses the Vector3 direction allocated by the input action to move the CAVE.
+        /// </summary>
+        /// <param name="context"></param>
         public void HandleMovementInput(InputAction.CallbackContext context)
         {
             moveDirection = context.ReadValue<Vector3>();//Stores the direction passed from the input system bindings
         }
 
+        /// <summary>
+        /// Uses the Vector2 direction allocated by the input action to rotate the CAVE.
+        /// </summary>
+        /// <param name="context"></param>
         public void HandleRotationInput(InputAction.CallbackContext context)
         { 
             rotateDirection = context.ReadValue<Vector2>();//Stores the direction passed from the input system bindings
