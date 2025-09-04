@@ -21,8 +21,11 @@ namespace MMUCAVE
         private GameObject cave;
 
 
-        #region Swipe Inputs
-		/// Could be combined into a generic rotate direction function? ///
+        #region Swipe Input
+        /// <summary>
+        /// Rotates the CAVE view in the direction specified.<br><ul> (Up = Left, Down = Right) </ul></br>
+        /// </summary>
+        /// <param name="direction"></param>
         public void RotateCAVE(Vector3 direction)
         {
             cave.transform.Rotate(direction, rotationSpeed); // Rotate view
@@ -33,7 +36,11 @@ namespace MMUCAVE
         
         
         #region Touch Actions
-        /// <summary> Generic input handler, takes in a position and touch type, outputs relevant function call </summary>
+        /// <summary>
+        /// Calls relevant function associated with passed Input Type
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="type"></param>
         public void HandleTouchActions(Vector2 position, CAVEUtilities.TouchTypes type)
         {
             RaycastHit raycastHit = CAVEUtilities.RaycastFromScreenPosition(position, cameras);
