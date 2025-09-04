@@ -5,19 +5,34 @@ using UnityEngine;
 /// </summary>
 public static class CAVEUtilities
 {
-    public enum TouchTypes //Types of touch input that can be handled
+    /// <summary>
+    /// Defined ways the CAVE can respond to touch interactions.
+    /// </summary>
+    public enum TouchTypes
     {
-        None, // No action
-        Teleport, // Teleport the CAVE to the hit point
-        SpawnObject, // Spawn a random object at the hit point (a demo of the raycast)
-        ShootProjectile, // Shoot a projectile from the CAVE at the touch input position
-        Touchables, // Interact with Touchable.cs objects
-        Look //Drag along CAVE walls to rotate the camera view
+        /// <summary> No action. </summary>
+        None,
+        /// <summary> Teleport the CAVE to the touch point. </summary>
+        Teleport,
+        /// <summary> Spawn a random object at the touch point. </summary>
+        SpawnObject,
+        /// <summary> Shoot a projectile from the CAVE toward the touch input position. </summary>
+        ShootProjectile,
+        /// <summary> Trigger Interactable Objects. </summary>
+        Touchables,
+        /// <summary> Drag along CAVE walls to rotate the camera view. </summary>
+        Look
     };
 
+    /// <summary>
+    /// Get the camera that contains the mouse position,
+    /// used to determine which camera the mouse is over.
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="cameras"></param>
+    /// <returns></returns>
     public static Camera GetCameraFromScreenPosition(Vector3 pos, Camera[] cameras)
-    {	// Get the camera that contains the mouse position,
-       	// Used to determine which camera the mouse is over
+    {	
         float screenWidth = Screen.width;
 
         for (int i = 0; i < cameras.Length; i++)
@@ -41,7 +56,8 @@ public static class CAVEUtilities
 
 
     /// <summary>
-    /// Raycasts from the given position to the corresponding world point, uses the correct CAVE camera for accurate results and returns the raycast hit
+    /// Raycasts from the given position to the corresponding world point,
+    /// uses the correct CAVE camera for accurate results and returns the raycast hit.
     /// </summary>
     public static RaycastHit RaycastFromScreenPosition(Vector2  pos,  Camera[] cameras)
     {
