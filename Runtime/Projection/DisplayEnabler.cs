@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// manually enable all required screens for accurate CAVE projection
+/// Manually enable all required screens for accurate CAVE projection
 /// </summary>
 public class DisplayEnabler : MonoBehaviour
 {
