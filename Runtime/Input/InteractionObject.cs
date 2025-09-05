@@ -4,12 +4,12 @@ namespace MMUCAVE
 {
     /// <summary>
     /// All classes that inherit from InteractionObject respond to being tapped through implementation of OnTouch.
-    /// <u>Requires a collider on the object</u>
+    /// (Requires a collider on the object)
     /// </summary>
     public abstract class InteractionObject : MonoBehaviour
     {
         /// <summary>
-        /// All Interaction Objects must implement OnTouch as the reaction to any tap events.
+        /// Override this to inform what happens when this object is tapped.
         /// </summary>
         /// <example>
         /// <code>
