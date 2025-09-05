@@ -14,7 +14,7 @@ namespace MMUCAVE
     {
         [Header("References")]
         [Tooltip("Reference to the CAVE's Input Manager")][SerializeField]
-        CAVEInputManager caveInputManager;
+        private CAVEInputManager caveInputManager;
         
         [Header("Threshold Adjustments")]
         [Tooltip("The maximum inputs your display can handle")][SerializeField]
