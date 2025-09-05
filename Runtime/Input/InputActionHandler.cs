@@ -57,7 +57,8 @@ namespace MMUCAVE
             _coroutines[finger.index] = StartCoroutine(TouchUpdate(finger));// Starts checking for changes to the input
         }
 
-        private void FingerUp(Finger finger){
+        private void FingerUp(Finger finger)
+        {
             // Clears all data for the unneeded touch
             StopCoroutine(_coroutines[finger.index]);// Stops checking for input changes
             if (Mathf.Abs(_startTimes[finger.index] - Time.time) < tapTimeThreshold)// Compare start and current time
