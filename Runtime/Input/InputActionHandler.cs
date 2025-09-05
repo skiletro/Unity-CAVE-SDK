@@ -48,7 +48,8 @@ namespace MMUCAVE
         }
 
 
-        private void FingerDown(Finger finger){
+        private void FingerDown(Finger finger)
+        {
             // Stores all the needed data for the new touch in the relevant arrays
             _lastPositions[finger.index] = finger.currentTouch.screenPosition;
             _startTimes[finger.index] = Time.time;
