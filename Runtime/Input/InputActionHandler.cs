@@ -7,10 +7,10 @@ using System.Collections.Generic;
 namespace MMUCAVE
 {
     /// <summary>
-    /// Handles all touch inputs to the CAVE and reacts dependant on type of input recieved.
+    /// Handles all touch inputs to the CAVE and reacts dependent on type of input received.
     /// <br> Provides adjustment variables to hone to your CAVE setup. </br>
     /// </summary>
-    public class EnhancedInputBehaviour: MonoBehaviour
+    public class InputActionHandler: MonoBehaviour
     {
         [Header("References")]
         [Tooltip("Reference to the CAVE's Input Manager")][SerializeField]
