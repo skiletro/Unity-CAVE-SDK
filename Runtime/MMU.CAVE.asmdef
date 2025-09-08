@@ -2,7 +2,8 @@
     "name": "MMU.CAVE",
     "rootNamespace": "MMUCAVE",
     "references": [
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
