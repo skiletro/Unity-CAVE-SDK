@@ -12,7 +12,7 @@ public class VideoController : MonoBehaviour
     [Header("References")]
 
     [Tooltip("Dropdown to select video clips")]
-    [SerializeField
+    [SerializeField]
     private TMP_Dropdown dropdown;
 
     [Tooltip("Video player component")]
@@ -73,6 +73,7 @@ public class VideoController : MonoBehaviour
         if (dropdownVideoClips == null) Debug.LogWarning(name + " dropdownVideoClips == null");
         if (onDropdownChanged == null) Debug.LogWarning(name + " onDropdownChanged == null");
 
+        // Sets up player to play correctly
         if (!videoPlayer.playOnAwake)
         {
             videoPlayer.playOnAwake = true; // Set play on awake for next enable.
@@ -115,6 +116,7 @@ public class VideoController : MonoBehaviour
             videoJumpPending = false;
         }
 
+        // Check whether the video is playing normally
         if (!isDragging && !videoJumpPending)
         {
             if (videoPlayer.clip.length > 0)
@@ -129,22 +131,29 @@ public class VideoController : MonoBehaviour
 
     private void UpdateVideoClip()
     {
+        // Do nothing if user selects the same video
         if (currentDropdownIndex == dropdown.value)
             return;
 
         currentDropdownIndex = dropdown.value;
 
+        // Error handling
         if (dropdownVideoClips.Count - 1 < currentDropdownIndex)
         {
             Debug.LogWarning("VideoController: Not enough video clips to select this index");
             return;
-       }
+        }
 
+        // Set the video to the selected clip
         videoPlayer.clip = dropdownVideoClips[currentDropdownIndex];
 
-        onDropdownChanged?.Invoke();
+        onDropdownChanged?.Invoke(); // Activate the function if it exists
     }
 
+    /// <summary>
+    ///     To be used as part of an interaction event.
+    ///     Enables the 'jumping' state of the slider, allowing the user to scrub the timeline.
+    /// </summary>
     public void OnPointerDown()
     {
         videoJumpPending = true;
@@ -152,6 +161,10 @@ public class VideoController : MonoBehaviour
         VideoJump();
     }
 
+    /// <summary>
+    ///     To be used as part of an interaction event, in conjunction with the OnPointerDown() function.
+    ///     Disables the 'jumping' state of the slider.
+    /// </summary>
     public void OnRelease()
     {
         isDragging = false;
@@ -165,6 +178,9 @@ public class VideoController : MonoBehaviour
         slider.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    ///     To be used as part of an interaction event.
+    /// </summary>
     public void OnDrag()
     {
         isDragging = true;
@@ -179,6 +195,10 @@ public class VideoController : MonoBehaviour
         videoPlayer.time = (long)frame;
     }
 
+    /// <summary>
+    ///     To be used as part of an interaction event.
+    ///     Toggles the playback state of the video player.
+    /// </summary>
     public void PlayOrPauseVideo()
     {
         if (videoIsPlaying)
@@ -191,6 +211,9 @@ public class VideoController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///     To be used as part of an interaction event.
+    /// </summary>
     public void VideoStop()
     {
         videoIsPlaying = false;
@@ -199,6 +222,9 @@ public class VideoController : MonoBehaviour
         onVideoStop?.Invoke();
     }
 
+    /// <summary>
+    ///     To be used as part of an interaction event.
+    /// </summary>
     public void VideoPlay()
     {
         videoIsPlaying = true;
