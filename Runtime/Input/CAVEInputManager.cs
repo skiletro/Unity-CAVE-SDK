@@ -23,11 +23,11 @@ namespace MMUCAVE
         [Header("Input Options")]
         [Tooltip("How the CAVE responds to tap inputs when not touching an Interaction Object")]
         [SerializeField]
-        private CAVEUtilities.TapTypes tapType = CAVEUtilities.TapTypes.None;
+        private CAVEUtilities.TouchTypes tapType = CAVEUtilities.TouchTypes.None;
 
         [Tooltip("How the CAVE responds to hold inputs when not touching an Interaction Object")]
         [SerializeField]
-        private CAVEUtilities.HoldTypes holdType = CAVEUtilities.HoldTypes.None;
+        private CAVEUtilities.TouchTypes holdType = CAVEUtilities.TouchTypes.None;
 
         [Tooltip("How the CAVE responds to swipe inputs when not touching an Interaction Object")]
         [SerializeField]
@@ -98,15 +98,15 @@ namespace MMUCAVE
                 // If there is no object, or it is not an Interaction Object, act on TapType
                 switch (tapType)
                 {
-                    case CAVEUtilities.TapTypes.None:
+                    case CAVEUtilities.TouchTypes.None:
                         return; // Do nothing
 
-                    case CAVEUtilities.TapTypes.Teleport:
+                    case CAVEUtilities.TouchTypes.Teleport:
                         MoveCaveToHitPosition(raycastHit);
 
                         break; //Moves CAVE to touch coordinates.
 
-                    case CAVEUtilities.TapTypes.SpawnObject:
+                    case CAVEUtilities.TouchTypes.SpawnObject:
                         InstantiateRandomPrimitiveAtHitPosition(raycastHit);
 
                         break; //Spawn random object at touch coordinates, only for demonstration.
@@ -138,15 +138,15 @@ namespace MMUCAVE
                 // If there is no object, or it is not an Interaction Object, act on HoldType
                 switch (holdType)
                 {
-                    case CAVEUtilities.HoldTypes.None:
+                    case CAVEUtilities.TouchTypes.None:
                         return; // Do nothing
 
-                    case CAVEUtilities.HoldTypes.Teleport:
+                    case CAVEUtilities.TouchTypes.Teleport:
                         MoveCaveToHitPosition(raycastHit);
 
                         break; //Moves CAVE to touch coordinates.
 
-                    case CAVEUtilities.HoldTypes.SpawnObject:
+                    case CAVEUtilities.TouchTypes.SpawnObject:
                         InstantiateRandomPrimitiveAtHitPosition(raycastHit);
 
                         break; //Spawn random object at touch coordinates, only for demonstration.

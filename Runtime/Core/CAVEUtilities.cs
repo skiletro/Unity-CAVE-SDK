@@ -5,18 +5,6 @@ using UnityEngine;
 /// </summary>
 public static class CAVEUtilities
 {
-    public enum HoldTypes
-    {
-        /// <summary> No action. </summary>
-        None,
-
-        /// <summary> Teleport the CAVE to the touch point. </summary>
-        Teleport,
-
-        /// <summary> Spawn a random object at the touch point. </summary>
-        SpawnObject,
-    }
-
     public enum SwipeTypes
     {
         /// <summary> No action. </summary>
@@ -29,7 +17,7 @@ public static class CAVEUtilities
     /// <summary>
     ///     Defined ways the CAVE can respond to touch interactions.
     /// </summary>
-    public enum TapTypes
+    public enum TouchTypes
     {
         /// <summary> No action. </summary>
         None,
@@ -38,7 +26,7 @@ public static class CAVEUtilities
         Teleport,
 
         /// <summary> Spawn a random object at the touch point. </summary>
-        SpawnObject,
+        SpawnObject
 
     }
 
