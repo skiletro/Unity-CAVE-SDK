@@ -9,12 +9,12 @@ namespace MMUCAVE
     ///     Handles all touch inputs to the CAVE and reacts dependent on type of input received.
     ///     <br> Provides adjustment variables to hone to your CAVE setup. </br>
     /// </summary>
-    public class InputActionHandler : MonoBehaviour
+    public class TouchInputHandler : MonoBehaviour
     {
         [Header("References")]
         [Tooltip("Reference to the CAVE's Input Manager")]
         [SerializeField]
-        private CAVEInputManager caveInputManager;
+        private CAVEInteractionManager caveInteractionManager;
 
         [Header("Threshold Adjustments")]
         [Tooltip("The maximum inputs your display can handle")]
@@ -85,11 +85,11 @@ namespace MMUCAVE
                     tapTimeThreshold) // Compare start and current time
                 {
                     // If the time passed is less than what is required for a hold then respond to a tap
-                    caveInputManager.HandleTapActions(finger.currentTouch.screenPosition);
+                    caveInteractionManager.HandleTapActions(finger.currentTouch.screenPosition);
                 }
                 else
                 {
-                    caveInputManager.HandleHoldActions(finger.currentTouch.screenPosition);
+                    caveInteractionManager.HandleHoldActions(finger.currentTouch.screenPosition);
                 }
             }
 
@@ -131,7 +131,7 @@ namespace MMUCAVE
             {
                 // vv THE INTERACTION A NON-SWIPE CORRESPONDS TO vv
                 // If the time passed is more than what is required for a hold then respond to a hold
-                caveInputManager.HandleHoldActions(finger.currentTouch.screenPosition);
+                caveInteractionManager.HandleHoldActions(finger.currentTouch.screenPosition);
             }
         }
 
@@ -140,12 +140,12 @@ namespace MMUCAVE
             // Uses the dot product to determine how similar the touch direction is to each cardinal direction.
             if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
             {
-                caveInputManager.HandleSwipeActions(position, Vector2.down); // If swiped right, rotate right
+                caveInteractionManager.HandleSwipeActions(position, Vector2.down); // If swiped right, rotate right
             }
 
             if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
             {
-                caveInputManager.HandleSwipeActions(position, Vector2.up); // If swiped left, rotate left
+                caveInteractionManager.HandleSwipeActions(position, Vector2.up); // If swiped left, rotate left
             }
         }
 

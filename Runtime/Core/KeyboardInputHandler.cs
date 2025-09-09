@@ -6,7 +6,7 @@ namespace MMUCAVE
     /// <summary>
     ///     General movement controller for the CAVE system.
     /// </summary>
-    public class CAVEMovement : MonoBehaviour
+    public class KeyboardInputHandler : MonoBehaviour
     {
         [Tooltip("Reference to the CAVE game object")]
         [SerializeField]

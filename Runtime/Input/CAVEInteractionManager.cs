@@ -6,7 +6,7 @@ namespace MMUCAVE
     /// <summary>
     ///     Manages the in-world reactions to any input given by the input handler class.
     /// </summary>
-    public class CAVEInputManager : MonoBehaviour
+    public class CAVEInteractionManager : MonoBehaviour
     {
         [Tooltip("Reference to the cameras in the CAVE")]
         [SerializeField]
