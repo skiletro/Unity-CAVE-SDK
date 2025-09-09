@@ -11,52 +11,52 @@ public class VideoController : MonoBehaviour
 {
     [Header("References")]
 
-    [SerializeField]
     [Tooltip("Dropdown to select video clips")]
+    [SerializeField
     private TMP_Dropdown dropdown;
 
-    [SerializeField]
     [Tooltip("Video player component")]
+    [SerializeField]
     private VideoPlayer videoPlayer;
 
-    [SerializeField]
     [Tooltip("Play/Pause button GameObject")]
+    [SerializeField]
     private GameObject buttonPlayOrPause;
 
-    [SerializeField]
     [Tooltip("Play/Pause Button TMP Text")]
+    [SerializeField]
     private TMP_Text textPlayOrPause;
 
-    [SerializeField]
     [Tooltip("Slider that controls the video")]
+    [SerializeField]
     private Slider slider;
 
-    [SerializeField]
     [Tooltip("Slider text")]
+    [SerializeField]
     private TMP_Text sliderText;
 
-    [SerializeField]
     [Tooltip("If checked, the slider will fade off after a few seconds. If unchecked, the slider will remain on.")]
+    [SerializeField]
     private bool hideSliderAfterFewSeconds;
 
     [Header("Settings")]
-
-    [SerializeField]
+    
     [Tooltip("List of video clips for the dropdown")]
+    [SerializeField]
     private List<VideoClip> dropdownVideoClips;
 
     [Header("Events")]
 
-    [SerializeField]
     [Tooltip("Event triggered when the dropdown value changes")]
+    [SerializeField]
     private UnityEvent onDropdownChanged;
 
-    [SerializeField]
     [Tooltip("Event triggered when the video plays")]
+    [SerializeField]
     private UnityEvent onVideoPlay;
 
-    [SerializeField]
     [Tooltip("Event triggered when the video stops")]
+    [SerializeField]
     private UnityEvent onVideoStop;
 
     private int currentDropdownIndex = -1; // Init on an impossible index
@@ -127,7 +127,7 @@ public class VideoController : MonoBehaviour
         }
     }
 
-    void UpdateVideoClip()
+    private void UpdateVideoClip()
     {
         if (currentDropdownIndex == dropdown.value)
             return;
@@ -159,7 +159,7 @@ public class VideoController : MonoBehaviour
         VideoJump();
     }
 
-    IEnumerator HideSliderAfterSeconds(float duration = 1f)
+    private IEnumerator HideSliderAfterSeconds(float duration = 1f)
     {
         yield return new WaitForSeconds(duration);
         slider.gameObject.SetActive(false);
@@ -171,7 +171,7 @@ public class VideoController : MonoBehaviour
         videoJumpPending = true;
     }
 
-    void VideoJump()
+    private void VideoJump()
     {
         videoJumpPending = true;
         var frame = videoPlayer.clip.length * slider.value;
@@ -207,7 +207,7 @@ public class VideoController : MonoBehaviour
         onVideoPlay?.Invoke();
     }
 
-    void UpdateSliderText()
+    private void UpdateSliderText()
     {
         // Convert the current time and clip length to TimeSpan objects.
         TimeSpan currentTimeSpan = TimeSpan.FromSeconds(videoPlayer.time);
