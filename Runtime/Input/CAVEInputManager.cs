@@ -110,12 +110,7 @@ namespace MMUCAVE
                         InstantiateRandomPrimitiveAtHitPosition(raycastHit);
 
                         break; //Spawn random object at touch coordinates, only for demonstration.
-
-                    case CAVEUtilities.TapTypes.ShootProjectile:
-                        InstantiateProjectile(raycastHit);
-
-                        break; //Shoot random object towards touch coordinates, only for demonstration.
-
+                    
                     default:
                         Debug.LogWarning("No action selected or action not implemented.");
 
@@ -155,12 +150,7 @@ namespace MMUCAVE
                         InstantiateRandomPrimitiveAtHitPosition(raycastHit);
 
                         break; //Spawn random object at touch coordinates, only for demonstration.
-
-                    case CAVEUtilities.HoldTypes.ShootProjectile:
-                        InstantiateProjectile(raycastHit);
-
-                        break; //Shoot random object towards touch coordinates, only for demonstration.
-
+                    
                     default:
                         Debug.LogWarning("No action selected or action not implemented.");
 
@@ -199,36 +189,6 @@ namespace MMUCAVE
 
             // Add a Rigidbody for physics interactions
             primitive.AddComponent<Rigidbody>();
-        }
-
-        // Create a projectile and fire it from the CAVE towards the hit point
-        private void InstantiateProjectile(RaycastHit hit)
-        {
-            //List of available primitive types for the projectile
-            var primitiveTypes = new[]
-            {
-                PrimitiveType.Cube,
-                PrimitiveType.Sphere,
-                PrimitiveType.Capsule,
-                PrimitiveType.Cylinder
-            };
-
-            // Randomly select a primitive type
-            var randomType = primitiveTypes[Random.Range(0, primitiveTypes.Length)];
-
-            // Create the projectile GameObject
-            var projectile = GameObject.CreatePrimitive(randomType);
-            projectile.transform.localScale = Vector3.one * 0.1f; // Scale down the projectile for better visibility
-            projectile.transform.position   = cave.transform.position; // Start position is the CAVE's position
-            var rb = projectile.AddComponent<Rigidbody>(); // Add a Rigidbody to the projectile
-
-            rb.collisionDetectionMode =
-                CollisionDetectionMode.ContinuousDynamic; // Set collision detection mode for better accuracy
-
-            var direction =
-                (hit.point - cave.transform.position).normalized; // Calculate direction to the hit point
-
-            rb.linearVelocity = direction * 20f; // Set linear velocity of the projectile
         }
 
     #endregion

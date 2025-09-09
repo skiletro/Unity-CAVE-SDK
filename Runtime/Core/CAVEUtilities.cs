@@ -15,9 +15,6 @@ public static class CAVEUtilities
 
         /// <summary> Spawn a random object at the touch point. </summary>
         SpawnObject,
-
-        /// <summary> Shoot a projectile from the CAVE toward the touch input position. </summary>
-        ShootProjectile
     }
 
     public enum SwipeTypes
@@ -43,8 +40,6 @@ public static class CAVEUtilities
         /// <summary> Spawn a random object at the touch point. </summary>
         SpawnObject,
 
-        /// <summary> Shoot a projectile from the CAVE toward the touch input position. </summary>
-        ShootProjectile
     }
 
     /// <summary>
