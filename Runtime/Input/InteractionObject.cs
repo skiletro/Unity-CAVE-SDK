@@ -22,7 +22,7 @@ namespace MMUCAVE
         /// </example>
         public abstract void OnTouch();
 
-        public abstract void OnSwipe(Vector3 direction);
+        public abstract void OnSwipe(Vector2 direction);
         public abstract void OnHold();
     }
 }

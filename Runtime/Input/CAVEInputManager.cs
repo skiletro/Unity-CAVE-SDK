@@ -43,8 +43,8 @@ namespace MMUCAVE
         ///     If object is swiped and enabled, calls its OnSwipe function, otherwise handles as specified SwipeType
         /// </summary>
         /// <param name = "position"> </param>
-        /// <param name = "direction"> </param
-        public void HandleSwipeActions(Vector2 position, Vector3 direction)
+        /// <param name = "direction"> </param>
+        public void HandleSwipeActions(Vector2 position, Vector2 direction)
         {
             var raycastHit = CAVEUtilities.RaycastFromScreenPosition(position, cameras);
             var touchable  = raycastHit.collider ? raycastHit.collider.GetComponent<InteractionObject>() : null;

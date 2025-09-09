@@ -140,12 +140,12 @@ namespace MMUCAVE
             // Uses the dot product to determine how similar the touch direction is to each cardinal direction.
             if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
             {
-                caveInputManager.HandleSwipeActions(position, Vector3.down); // If swiped right, rotate right
+                caveInputManager.HandleSwipeActions(position, Vector2.down); // If swiped right, rotate right
             }
 
             if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
             {
-                caveInputManager.HandleSwipeActions(position, Vector3.up); // If swiped left, rotate left
+                caveInputManager.HandleSwipeActions(position, Vector2.up); // If swiped left, rotate left
             }
         }
 
