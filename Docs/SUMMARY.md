@@ -7,6 +7,10 @@
 
 # Features
 - [Touch Input](./features/touch_input.md)
+- 
+# Samples
+- [360 Video Player](./features/video_player.md)
+- [Kinect V1](./features/kinect.md)
 
 # Contributing
 - [Documentation](./contributing/documentation.md)
