@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -52,7 +52,7 @@ namespace MMUCAVE
         /// </summary>
         public static event Action<Vector2> OnCaveHeld;
 
-    #region Swipe Input
+        #region Swipe Input
 
         /// <summary>
         ///     If object is swiped and enabled, calls its OnSwipe function, otherwise handles as specified SwipeType
@@ -62,12 +62,12 @@ namespace MMUCAVE
         public void HandleSwipeActions(Vector2 position, Vector2 direction)
         {
             var raycastHit = CAVEUtilities.RaycastFromScreenPosition(position, cameras);
-            var touchable  = raycastHit.collider ? raycastHit.collider.GetComponent<InteractionObject>() : null;
+            var touchable = raycastHit.collider ? raycastHit.collider.GetComponent<InteractionObject>() : null;
 
             // Get a reference to the raycast hit object if it inherits from the InteractionObject class
             if (touchable)
             {
-                touchable.OnSwipe(direction); // Call the OnSwipe method on the object
+                touchable.SwipeDirection(direction); // Call the OnSwipe methods on the object
             }
             else
             {
@@ -93,10 +93,10 @@ namespace MMUCAVE
             }
         }
 
-    #endregion
+        #endregion
 
 
-    #region Touch Actions
+        #region Touch Actions
 
         /// <summary>
         ///     If object is tapped and enabled, calls its OnTap function, otherwise handles as specified TapType
@@ -105,7 +105,7 @@ namespace MMUCAVE
         public void HandleTapActions(Vector2 position)
         {
             var raycastHit = CAVEUtilities.RaycastFromScreenPosition(position, cameras);
-            var touchable  = raycastHit.collider ? raycastHit.collider.GetComponent<InteractionObject>() : null;
+            var touchable = raycastHit.collider ? raycastHit.collider.GetComponent<InteractionObject>() : null;
 
             // Get a reference to the raycast hit object if it inherits from the InteractionObject class
             if (touchable)
@@ -131,7 +131,7 @@ namespace MMUCAVE
                         break; //Spawn random object at touch coordinates, only for demonstration.
                     case CAVEUtilities.TouchTypes.CallEvent:
                         OnCaveTapped?.Invoke(position);
-                        
+
                         break; //Call a Unity Event
                     default:
                         Debug.LogWarning("No action selected or action not implemented.");
@@ -148,7 +148,7 @@ namespace MMUCAVE
         public void HandleHoldActions(Vector2 position)
         {
             var raycastHit = CAVEUtilities.RaycastFromScreenPosition(position, cameras);
-            var touchable  = raycastHit.collider ? raycastHit.collider.GetComponent<InteractionObject>() : null;
+            var touchable = raycastHit.collider ? raycastHit.collider.GetComponent<InteractionObject>() : null;
 
             // Get a reference to the raycast hit object if it inherits from the InteractionObject class
             if (touchable)
@@ -174,7 +174,7 @@ namespace MMUCAVE
                         break; //Spawn random object at touch coordinates, only for demonstration.
                     case CAVEUtilities.TouchTypes.CallEvent:
                         OnCaveHeld?.Invoke(position);
-                        
+
                         break; //Call a Unity Event
                     default:
                         Debug.LogWarning("No action selected or action not implemented.");
@@ -189,7 +189,7 @@ namespace MMUCAVE
             cave.transform.position = hit.point; // Move the CAVE to the hit point
         }
 
-    #region Demo behaviour
+        #region Demo behaviour
 
         // Spawns a random primitive at the hit point
         private void InstantiateRandomPrimitiveAtHitPosition(RaycastHit hit)
@@ -208,16 +208,16 @@ namespace MMUCAVE
 
             // Create the primitive and offset
             var primitive = GameObject.CreatePrimitive(randomType);
-            var scale     = Random.Range(0.2f, 0.5f);                        // Random scale for the primitive
+            var scale = Random.Range(0.2f, 0.5f);                        // Random scale for the primitive
             primitive.transform.localScale = Vector3.one * scale;            // Scale the primitive
-            primitive.transform.position   = hit.point + hit.normal * scale; // Offset from the surface
+            primitive.transform.position = hit.point + hit.normal * scale; // Offset from the surface
 
             // Add a Rigidbody for physics interactions
             primitive.AddComponent<Rigidbody>();
         }
 
-    #endregion
+        #endregion
 
-    #endregion
+        #endregion
     }
 }

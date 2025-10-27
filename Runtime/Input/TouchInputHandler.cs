@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -19,18 +19,14 @@ namespace MMUCAVE
         [Header("Threshold Adjustments")]
         [Tooltip("The maximum inputs your display can handle")]
         private static readonly int maxInputCount = 10;
-        
+
         [Tooltip("The minimum distance a touch must move to register as a swipe")]
         [SerializeField]
-        private float minimumDistance = 100f;
+        private float minimumDistance = 50f;
 
         [Tooltip("How frequently to check for changes in the input, lower = more frequent")]
         [SerializeField]
         private float inputUpdateWait = 0.1f;
-
-        [Tooltip("The percentage of similarity a swipe must have to register a cardinal direction")]
-        [SerializeField]
-        private float directionThreshold = .9f;
 
         [Tooltip("The minimum time that must pass before a tap becomes a hold")]
         [SerializeField]
@@ -42,14 +38,14 @@ namespace MMUCAVE
         {
             EnhancedTouchSupport.Enable();    // Enables the enhanced touch system for our use
             Touch.onFingerDown += FingerDown; // vv
-            Touch.onFingerUp   += FingerUp;   // Subscribes our functions to the touch system events
+            Touch.onFingerUp += FingerUp;   // Subscribes our functions to the touch system events
         }
 
         private void OnDisable()
         {
             EnhancedTouchSupport.Disable();   // Disables the enhanced touch system when unused
             Touch.onFingerDown -= FingerDown; // vv
-            Touch.onFingerUp   -= FingerUp;   // Unsubscribes from the touch system events
+            Touch.onFingerUp -= FingerUp;   // Unsubscribes from the touch system events
         }
 
 
@@ -82,7 +78,7 @@ namespace MMUCAVE
             }
         }
 
-    #region Swipe Detection
+        #region Swipe Detection
 
         private IEnumerator TouchUpdate(Finger finger) // Checks for changes to the touch input
         {
@@ -108,7 +104,7 @@ namespace MMUCAVE
                 touches[finger.index].direction = (finger.currentTouch.screenPosition - touches[finger.index].lastPosition).normalized;
 
                 // vv THE INTERACTION A SWIPE CORRESPONDS TO vv
-                SwipeDirection(touches[finger.index].direction, finger.currentTouch.screenPosition);
+                caveInteractionManager.HandleSwipeActions(finger.currentTouch.screenPosition, touches[finger.index].direction);
                 // In this example it rotates the view
             }
             else if (Mathf.Abs(touches[finger.index].startTime - Time.time) >
@@ -120,20 +116,6 @@ namespace MMUCAVE
             }
         }
 
-        private void SwipeDirection(Vector2 direction, Vector2 position)
-        {
-            // Uses the dot product to determine how similar the touch direction is to each cardinal direction.
-            if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
-            {
-                caveInteractionManager.HandleSwipeActions(position, Vector2.down); // If swiped right, rotate right
-            }
-
-            if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
-            {
-                caveInteractionManager.HandleSwipeActions(position, Vector2.up); // If swiped left, rotate left
-            }
-        }
-
-    #endregion
+        #endregion
     }
 }
