@@ -1,6 +1,6 @@
 ﻿{
   "name": "com.mmu.cavesdk",
-  "version": "2.0.0",
+  "version": "2.0.0-jamiefork",
   "displayName": "MMU CAVE SDK",
   "description": "A software development kit to make creating Unity content in a VR CAVE (Cave Automatic Virtual Environment) easier and more accessible.",
   "unity": "2022.3",
