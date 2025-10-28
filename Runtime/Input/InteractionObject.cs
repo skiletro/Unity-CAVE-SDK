@@ -48,3 +48,4 @@ namespace MMUCAVE
             OnSwipe(direction);
         }
     }
+}
